@@ -1,0 +1,26 @@
+//Interpret string line at a time
+//This is comment text, this is ignored, empty new lines are also ignored
+//Break up line into array of strings by tabs (this should be very simple)
+Character Sheet
+//# is considered an empty space
+#
+// The "`" symbolizes the spacing to match [] spacing
+Ability Name	`Ability Score	`Ability Modifier	`Total Adjustment	`Total Modifier
+//[] symbolize numerical blocks ex. [],[0], [5.7], [3]
+//<> is the same as a numerical block but any text ex. <ajkj>, <>, <"">
+STR	[]	[]	[]	[] 
+DEX	[]	[]	[]	[]
+CON	[]	[]	[]	[]
+INT	[]	[]	[]	[]
+WIS	[]	[]	[]	[]
+CHA	[]	[]	[]	[]
+#
+//Normal line
+Gear
+//Normal line
+Item	Weight
+//Tabbed in symbolizes an extenable list is here
+//Can be filled in values
+{Name: <Thing>	[4]}
+
+Total Weight	[]
