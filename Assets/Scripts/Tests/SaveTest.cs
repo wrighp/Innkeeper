@@ -13,30 +13,32 @@ public class SaveTest : MonoBehaviour
         public int num;
     }
 
-    public SaveTestData saveData;
+    public SaveTestData data;
+    string path;
 
-    public State state;
-    public enum State { Save, Load, Delete }
-    // Use this for initialization
-    void Start()
+    public void Awake()
     {
-        string path = Path.Combine(Application.persistentDataPath, "test" + ".tst");
-
-        switch (state)
-        {
-            case State.Save:
-                    SerializationManager.SaveObject(path, saveData);
-                    break;
-            case State.Load:
-                saveData = (SaveTestData)SerializationManager.LoadObject(path);
-                break;
-            case State.Delete:
-                SerializationManager.DeleteFile(path);
-                break;
-        }
+        path = Path.Combine(Application.persistentDataPath, "test" + ".tst");
     }
-    void Update()
+
+    public void ClearData()
     {
-
+        data = new SaveTestData();
     }
+
+    public void SaveData()
+    {
+        SerializationManager.SaveObject(path, data);
+    }
+
+    public void LoadData()
+    {
+        data = (SaveTestData)SerializationManager.LoadObject(path);
+    }
+
+    public void DeleteFile()
+    {
+        SerializationManager.DeleteFile(path);
+    }
+
 }
