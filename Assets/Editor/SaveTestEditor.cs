@@ -7,7 +7,18 @@ public class SaveTestEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        DrawDefaultInspector();
+        if (!Application.isPlaying)
+        {
+            GUILayout.Label("Need to be in Play mode to test!", EditorStyles.helpBox);
+        }
+            DrawDefaultInspector();
+
+        if (!Application.isPlaying)
+        {
+            GUILayout.Space(24);
+            GUILayout.Label("Play to do test.", EditorStyles.boldLabel);
+            return;
+        }
 
         SaveTest test = (SaveTest)target;
         if (GUILayout.Button("Save"))
