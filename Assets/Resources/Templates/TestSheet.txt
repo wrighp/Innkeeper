@@ -8,7 +8,7 @@ Character Sheet
 Ability Name	`Ability Score	`Ability Modifier	`Total Adjustment	`Total Modifier
 //[] symbolize numerical blocks ex. [],[0], [5.7], [3]
 //<> is the same as a numerical block but any text ex. <ajkj>, <>, <"">
-STR	[]	[]	[]	[] 
+STR	[]	[]	[]	[]
 DEX	[]	[]	[]	[]
 CON	[]	[]	[]	[]
 INT	[]	[]	[]	[]
