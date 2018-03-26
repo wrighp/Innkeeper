@@ -87,7 +87,7 @@ public static class SerializationManager
     {
         if (!File.Exists(path))
         {
-            Debug.LogFormat("Could not load file: {0}", path);
+            Debug.LogFormat("Could not load file: {0}\nFile does not exist!", path);
             return null;
         }
 
@@ -109,6 +109,15 @@ public static class SerializationManager
     }
     public static void DeleteFile(string path)
     {
-        File.Delete(path);
+        if (File.Exists(path))
+        {
+            Debug.LogFormat("Deleting file: {0}", path);
+            File.Delete(path);
+        }
+        else
+        {
+            Debug.LogFormat("Could not delete file: {0}\nFile does not exist!", path);
+        }
+        
     }
 }

@@ -47,7 +47,7 @@ public class NetworkHandler : NetworkBehaviour {
 
 public struct PagePacket
 {
-    public enum PageType { SharedImage, StatBlockUI, Map }
+    public enum PageType { TestData, SharedImage, StatBlockUI, Map }
 
     public string name;
     public PageType pageType;
