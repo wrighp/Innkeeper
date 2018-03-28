@@ -1,28 +1,57 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System;
 using System.Collections.Generic;
 
-struct lineData
+public enum WordType
+{
+    StringInput,
+    NumInput,
+    Checked,
+    Unchecked,
+    String
+}
+
+public enum ListType
+{
+    Start,
+    End,
+    None
+}
+
+public class LineData
 {
     public string[] words;
     public List<int> weights;
-    public List<bool> forms;
+    public List<WordType> forms;
+    public ListType listing = ListType.None;
     public int totalWeight;
 
-    public lineData(string input)
+    public int stringWeight;
+    public int numWeight;
+    public int checkWeight;
+
+    public LineData(string input, int sw, int nw, int cw)
     {
+        stringWeight = sw;
+        numWeight = nw;
+        checkWeight = cw;
         totalWeight = 0;
 
         words = input.Split('\t');
         weights = new List<int>();
-        forms = new List<bool>();
+        forms = new List<WordType>();
         for (int i = 0; i < words.Length; i++)
         {
             if (words[i].Length > 1 && words[i][0] == '/' && words[i][1] == '/')
             {
                 Debug.Log("Comment");
+                break;
+            }
+            else if (words[i].Length > 0 && words[i][0] == '\n')
+            {
+                Debug.Log("Newline");
                 break;
             }
             else if (i == 0 && words[i].Length > 0 && words[i][0] == '#')
@@ -31,19 +60,94 @@ struct lineData
                 totalWeight = -1;
                 break;
             }
-            forms.Add(false);
+            else if (i == 0 && words[i].Length > 0 && words[i][0] == '{')
+            {
+                Debug.Log("List Start");
+                listing = ListType.Start;
+                break;
+            }
+            else if (i == 0 && words[i].Length > 0 && words[i][0] == '}')
+            {
+                Debug.Log("List End");
+                listing = ListType.End;
+                break;
+            }
+
+            bool ticked = false;
+
             if (words[i].Length > 0 && words[i][0] == '`')
             {
-                weights.Add(1);
+                ticked = true;
                 words[i] = words[i].Substring(1);
             }
-            else if (words[i].Length > 0 && words[i][0] == '[' && words[i][(words[i].Length - 1)] == ']')
+
+            if (words[i].Length > 0 && words[i][0] == '[' && words[i][(words[i].Length - 1)] == ']')
             {
-                forms[i] = true;
-                weights.Add(1);
+                forms.Add(WordType.NumInput);
                 words[i] = words[i].Substring(1, words[i].Length - 2);
             }
-            else weights.Add(3);
+            else if (words[i].Length > 0 && words[i][0] == '<' && words[i][(words[i].Length - 1)] == '>')
+            {
+                forms.Add(WordType.StringInput);
+                words[i] = words[i].Substring(1, words[i].Length - 2);
+            }
+            else if (words[i].Length > 0 && words[i][0] == '(' && words[i][(words[i].Length - 1)] == ')')
+            {
+                words[i] = words[i].Substring(1, words[i].Length - 2);
+                if (words[i].Contains("*"))
+                {
+                    forms.Add(WordType.Checked);
+                }
+                else
+                {
+                    forms.Add(WordType.Unchecked);
+                }
+                words[i] = "";
+            }
+            else
+            {
+                forms.Add(WordType.String);
+            }
+
+            if (!ticked)
+            {
+                switch (forms[forms.Count - 1])
+                {
+                    case WordType.NumInput:
+                        {
+                            weights.Add(numWeight);
+                            break;
+                        }
+
+                    case WordType.StringInput: 
+                        {
+                            weights.Add(stringWeight);
+                            break;
+                        }
+
+                    case WordType.Checked:
+                        {
+                            weights.Add(checkWeight);
+                            break;
+                        }
+
+                    case WordType.Unchecked:
+                        {
+                            weights.Add(checkWeight);
+                            break;
+                        }
+
+                    case WordType.String:
+                        {
+                            weights.Add(stringWeight);
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                weights.Add(numWeight);
+            }
             totalWeight += weights[i];
             Debug.Log(words[i] + weights[i] + forms[i]);
         }
@@ -54,12 +158,16 @@ struct lineData
 
 public static class StatBlockParser
 {
-    public static List<lineData> ReadData(string filename)
+    public static List<LineData> ReadData(TextAsset textAsset, int sw, int nw, int cw)
     {
-        string[] lines = System.IO.File.ReadAllLines(@filename);
-        List<lineData> rows = new List<lineData>();
-        foreach(string line in lines) {
-            rows.Add(new lineData(line));
+        List<LineData> rows = new List<LineData>();
+        using (StringReader sr = new StringReader(textAsset.ToString()))
+        {
+            string line;
+            while((line = sr.ReadLine()) != null)
+            {
+                rows.Add(new LineData(line, sw, nw, cw));
+            }
         }
 
         return rows;
