@@ -1,0 +1,200 @@
+//Patfinder Character Sheet
+//Essential player information
+Character Name 	<>	Alignment	<>	Player Name	<>
+Class/Level	<>	Deity	<>	Homeland	<>
+Race	<>	Size	<>	Gender	<>	Age	[]
+Height	<>	Weight	<>	Hair	<>	Eyes	<>
+#
+
+//Ability scores and modifiers
+Ability Scores
+Ability	`Score	`Modifier	`Temp Adjustment	`Temp Modifier
+STR	[]	[]	[]	[]
+DEX	[]	[]	[]	[]
+CON	[]	[]	[]	[]
+INT	[]	[]	[]	[]
+WIS	[]	[]	[]	[]
+CHA	[]	[]	[]	[]
+#
+
+//Hit points, speed, and initiative
+HP 
+Maximum	`Wounds	`Nonlethal damage	`DR
+[]	[]	[]	<>
+#
+
+Speed	`Ft.	`Sq.
+Normal	[]	[]
+With Armor	[]	[]
+Fly	[]	<>
+Swim	[]
+Climb	[]
+Burrow	[]
+Temporary Modifiers	<>
+#
+
+Initiative
+Total	`Dex Modifier	`Misc
+[]	[]	[]
+#
+
+//Armor Class, Resistances
+Armor Class
+Total	`Base	`Armor	`Shield	`Dex Mod	`Size Mod	`Natural Armor	`Deflection	`Misc
+[]	10	[]	[]	[]	[]	[]	[]	[]
+#
+
+Touch AC:	[]
+Flat-footed AC:	[]
+Modifiers:	<>
+
+Saving Throws
+Type	`Total	`Base	`Ability Mod	`Magic	`Misc	`Temp
+Fortitude(CON)	[]	[]	[]	[]	[]	[]
+Reflex(DEX)	[]	[]	[]	[]	[]	[]
+Will(WIS)	[]	[]	[]	[]	[]	[]
+#
+
+Modifiers	<>
+Spell Resistance	[]
+
+//Base attack bonus, CMB, CMD, weapons
+Base Attack Bonus	[]
+
+CMB
+Total	`BAB	`STR mod	`Size mod	`Modifiers
+[]	[]	[]	[]	<>
+#
+
+CMD
+Total	`BAB	`STR mod	`DEX mod	`Size mod	`Base
+[]	[]	[]	[]	[]	10
+#
+
+Weapons
+Name	`Bonus	`Critical	`Type	`Range	`Ammo	`Damage
+{<>	<>	<>	<>	<>	<>	<>}
+#
+
+//Skills
+Skills
+Name	`Class Skill	`Total	`Ability	`Mod	`Ranks	`Misc
+Acrobatics	()	[]	DEX	[]	[]	[]
+Appraise	()	[]	INT	[]	[]	[]
+Bluff	()	[]	CHA	[]	[]	[]
+Climb	()	[]	STR	[]	[]	[]
+Craft
+{<>	()	[]	INT	[]	[]	[]}
+Diplomacy	()	[]	CHA	[]	[]	[]
+Disable Device	()	[]	DEX	[]	[]	[]
+Disguise	()	[]	CHA	[]	[]	[]
+Escape Artist	()	[]	DEX	[]	[]	[]
+Fly	()	[]	DEX	[]	[]	[]
+Handle Animal	()	[]	CHA	[]	[]	[]
+Heal	()	[]	WIS	[]	[]	[]
+Intimidate	()	[]	CHA	[]	[]	[]
+Knowledge
+{<>	()	[]	INT	[]	[]	[]}
+Linguistics	()	[]	INT	[]	[]	[]
+Perception	()	[]	WIS	[]	[]	[]
+Perform
+{<>	()	[]	CHA	[]	[]	[]}
+Profession
+{<>	()	[]	WIS	[]	[]	[]}
+Ride	()	[]	DEX	[]	[]	[]
+Sense Motive	()	[]	WIS	[]	[]	[]
+Slight of Hand	()	[]	DEX	[]	[]	[]
+Spellcraft	()	[]	INT	[]	[]	[]
+Stealth	()	[]	DEX	[]	[]	[]
+Survival	()	[]	WIS	[]	[]	[]
+Swim	()	[]	STR	[]	[]	[]
+Use Magic Device	()	[]	CHA	[]	[]	[]
+#
+
+Conditional Modifiers:	<>
+Languages:	<>
+
+//Armor
+Armor
+Item	`Bonus	`Types	`Check Penalty	`Spell Failure	`Weight	`Properties
+{<>	[]	<>	[]	[]	<>	<>}
+Totals
+	[]	<>	[]	[]	<>	<>
+#
+
+//Gear, load, and money
+Gear
+Item	`Weight
+{<>	[]}
+Total Weight	[]
+#
+Light Load	[]
+Medium Load	[]
+Heavy Load	[]
+Lift Over Head	[]
+Lift Off Ground	[]
+Drag or Push	[]
+
+Money
+CP	[]
+SP	[]
+GP	[]
+PP	[]
+Additional:	<>
+
+//Feats, Special Abilities, Spells
+Feats
+{<>}
+
+Special Abilities
+{<>}
+
+Spells
+Level	`Spells Known	`Save DC	`Spells per Day	`Bonus Spells
+0	[]	[]	[]	--
+1	[]	[]	[]	[]
+2	[]	[]	[]	[]
+3	[]	[]	[]	[]
+4	[]	[]	[]	[]
+5	[]	[]	[]	[]
+6	[]	[]	[]	[]
+7	[]	[]	[]	[]
+8	[]	[]	[]	[]
+9	[]	[]	[]	[]
+#
+Conditional Modifiers:	<>
+Domains/Specialty School: <>
+
+0:
+{<>}
+
+1:	()	()	()	()	()	()	()	()	()	()
+{<>}
+
+2:	()	()	()	()	()	()	()	()	()	()
+{<>}
+
+3:	()	()	()	()	()	()	()	()	()	()
+{<>}
+
+4:	()	()	()	()	()	()	()	()	()	()
+{<>}
+
+5:	()	()	()	()	()	()	()	()	()	()
+{<>}
+
+6:	()	()	()	()	()	()	()	()	()	()
+{<>}
+
+7:	()	()	()	()	()	()	()	()	()	()
+{<>}
+
+8:	()	()	()	()	()	()	()	()	()	()
+{<>}
+
+9:	()	()	()	()	()	()	()	()	()	()
+{<>}
+
+//Experience Points
+Experience Points:	[]
+To next level:	[]
