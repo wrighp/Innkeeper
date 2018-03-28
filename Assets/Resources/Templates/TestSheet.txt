@@ -21,6 +21,11 @@ Gear
 Item	Weight
 //Tabbed in symbolizes an extenable list is here
 //Can be filled in values
-{Name: <Thing>	[4]}
-
+//Open bracket { begins a new editable list, } closes the list
+{
+<Thing>	[4]
+<Thing>	[16]
+}
+Are you a Manchurian Candidate?	()
+Are you HOGG?	(*)
 Total Weight	[]
