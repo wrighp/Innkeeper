@@ -36,8 +36,25 @@ public class StatBlockForm : MonoBehaviour {
          *                   is not visible
          */
         List<LineData> rows = StatBlockParser.ReadData(text, stringWeight, numWeight, checkWeight);
-        foreach(LineData obj in rows)
+
+        
+
+        for (int i = 0, rowsCount = rows.Count; i < rowsCount; i++)
         {
+            LineData row = rows[i];
+
+            if(row.listing == LineData.ListType.Start)
+            {
+
+            }
+           
+
+
+            for(int j = 0; j < row.words.Length; j++)
+            {
+
+            }
+            
 
         }
     }
