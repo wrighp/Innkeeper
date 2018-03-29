@@ -6,10 +6,15 @@ using UnityEngine;
 
 public class NetworkHandler : NetworkBehaviour
 {
-
+    public static NetworkHandler instance;
     SyncListPagePacket pageSyncList = new SyncListPagePacket();
     Dictionary<string, GameObject> pages = new Dictionary<string, GameObject>();
 
+
+    public void Awake()
+    {
+        instance = this;
+    }
 
     public override void OnStartClient()
     {
