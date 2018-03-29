@@ -37,6 +37,11 @@ public class StatBlockForm : MonoBehaviour
         CreateStatBlock(new StatBlockUIData());
     }
 
+    /// <summary>
+    /// Call to create UI elements from StatBlockUIData
+    /// Passing in data with an empty string creates based on template
+    /// </summary>
+    /// <param name="uiData"></param>
     public void CreateStatBlock(StatBlockUIData uiData)
     {
         /* rows holds a list object of lineData objectss
@@ -132,6 +137,22 @@ public class StatBlockForm : MonoBehaviour
 
         //Debug.Log(StatBlockParser.LineDataToString(rows, stringWeight, numWeight, checkWeight));
         
+    }
+
+    /// <summary>
+    /// Call to get stat block data from ui elements
+    /// </summary>
+    /// <returns></returns>
+    public StatBlockUIData CreateStatBlockUIData()
+    {
+        StatBlockUIData uiData = new StatBlockUIData();
+        List<LineData> rows = new List<LineData>();
+        //Loop through UI elements and convert to list of linedata
+
+
+
+        uiData.text = StatBlockParser.LineDataToString(rows, stringWeight, numWeight, checkWeight);
+        return uiData;
     }
 
     // Update is called once per frame
