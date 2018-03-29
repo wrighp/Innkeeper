@@ -1,13 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StatBlockForm : MonoBehaviour {
+
+    public Transform testLayout;
+
 
     public TextAsset text;
     public int stringWeight;
     public int numWeight;
     public int checkWeight;
+
+    public GameObject lineSegmentUI;
+    public GameObject textUI;
+    public GameObject checkboxUI;
+    public GameObject checkboxUIOn;
+    public GameObject stringInputUI;
+    public GameObject numInputUI;
+
 
     // Use this for initialization
     void Start () {
@@ -37,22 +49,57 @@ public class StatBlockForm : MonoBehaviour {
          */
         List<LineData> rows = StatBlockParser.ReadData(text, stringWeight, numWeight, checkWeight);
 
-        
-
+        Transform layoutGroup = testLayout;
+        GameObject.Instantiate(lineSegmentUI, layoutGroup);
         for (int i = 0, rowsCount = rows.Count; i < rowsCount; i++)
         {
             LineData row = rows[i];
 
-            if(row.listing == LineData.ListType.Start)
+            if(row.listing == LineData.ListType.Start || row.listing == LineData.ListType.End)
             {
-
+                continue;
             }
-           
+            if (row.totalWeight == 0)
+            {
+                //If "//" then skip line spacing
+                continue;
+            }
+            Transform lineSpacer = ((GameObject)GameObject.Instantiate(lineSegmentUI, layoutGroup)).transform;
+            if (row.totalWeight == -1)
+            {
+                //If "#" then skip building words
+                continue;
+            }
 
-
-            for(int j = 0; j < row.words.Length; j++)
+            for (int j = 0; j < row.words.Length; j++)
             {
 
+                var text = row.words[j];
+
+                GameObject obj;
+                switch (row.forms[j])
+                {
+                    case WordType.StringInput:
+                        obj = (GameObject)GameObject.Instantiate(stringInputUI, lineSpacer);
+                        obj.GetComponentsInChildren<Text>()[1].text = text;
+                        break;
+                    case WordType.NumInput:
+                        obj = (GameObject)GameObject.Instantiate(numInputUI, lineSpacer);
+                        obj.GetComponentsInChildren<Text>()[1].text = text;
+                        break;
+                    case WordType.Checked:
+                        obj = (GameObject)GameObject.Instantiate(checkboxUIOn, lineSpacer);
+                        break;
+                    case WordType.Unchecked:
+                        obj = (GameObject)GameObject.Instantiate(checkboxUI, lineSpacer);
+                        break;
+                    case WordType.String:
+                        obj = (GameObject)GameObject.Instantiate(textUI, lineSpacer);
+                        obj.GetComponent<Text>().text = text;
+                        break;
+                    default:
+                        break;
+                }
             }
             
 
