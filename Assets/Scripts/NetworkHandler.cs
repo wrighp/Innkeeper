@@ -58,7 +58,8 @@ public class NetworkHandler : NetworkBehaviour
         {
             case PagePacket.PageType.StatBlockUI:
                 {
-
+                    StatBlockUIData uiData = (StatBlockUIData)SerializationManager.LoadObject(packet.data);
+                    //Create statblockui
                     break;
                 }
             default:
@@ -177,9 +178,7 @@ public class SharedImageData : PageData
 [Serializable]
 public class StatBlockUIData : PageData
 {
-    string text;
-    //TextAsset t = new TextAsset();
-    //t.bytes
+   public string text;
 }
 
 [Serializable]

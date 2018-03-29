@@ -14,6 +14,11 @@ public static class SerializationManager
         Selector.AddSurrogate(typeof(Color32), new StreamingContext(StreamingContextStates.All), new Color32SerializationSurrogate());
     }
 
+    public static string CreatePath(string filename)
+    {
+        return Path.Combine(Application.persistentDataPath, filename);
+    }
+
     public static byte[] SerializeObject(object graph)
     {
         MemoryStream ms = new MemoryStream();

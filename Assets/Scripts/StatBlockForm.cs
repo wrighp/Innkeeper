@@ -12,7 +12,7 @@ public class StatBlockForm : MonoBehaviour
     public Transform testLayout;
 
 
-    public TextAsset text;
+    public TextAsset textAsset;
     public string savePath;
     public int stringWeight;
     public int numWeight;
@@ -28,6 +28,16 @@ public class StatBlockForm : MonoBehaviour
 
     // Use this for initialization
     void Start()
+    {
+
+    }
+
+    public void CreateTestStatBlock()
+    {
+        CreateStatBlock(new StatBlockUIData());
+    }
+
+    public void CreateStatBlock(StatBlockUIData uiData)
     {
         /* rows holds a list object of lineData objectss
          * For each line in the statblock file passed to the parser,
@@ -53,7 +63,17 @@ public class StatBlockForm : MonoBehaviour
          *                   space. totalWeight = 0 indicates this line
          *                   is not visible
          */
-        List<LineData> rows = StatBlockParser.StringToLineData(text.text, stringWeight, numWeight, checkWeight);
+        string sourceText;
+        if(uiData.text == null)
+        {
+            sourceText = textAsset.text;
+        }
+        else
+        {
+            sourceText = uiData.text;
+        }
+
+        List<LineData> rows = StatBlockParser.StringToLineData(sourceText, stringWeight, numWeight, checkWeight);
         
         Transform layoutGroup = testLayout;
         GameObject.Instantiate(lineSegmentUI, layoutGroup);
@@ -111,7 +131,6 @@ public class StatBlockForm : MonoBehaviour
         }
 
         Debug.Log(StatBlockParser.LineDataToString(rows, stringWeight, numWeight, checkWeight));
-        
     }
 
     // Update is called once per frame
