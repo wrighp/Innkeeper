@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatBlockForm : MonoBehaviour {
+public class StatBlockForm : MonoBehaviour
+{
 
     public Transform testLayout;
 
 
     public TextAsset text;
+    public string savePath;
     public int stringWeight;
     public int numWeight;
     public int checkWeight;
@@ -22,7 +27,8 @@ public class StatBlockForm : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         /* rows holds a list object of lineData objectss
          * For each line in the statblock file passed to the parser,
          * a lineData struct is created which stores
@@ -47,15 +53,15 @@ public class StatBlockForm : MonoBehaviour {
          *                   space. totalWeight = 0 indicates this line
          *                   is not visible
          */
-        List<LineData> rows = StatBlockParser.ReadData(text.ToString(), stringWeight, numWeight, checkWeight);
-
+        List<LineData> rows = StatBlockParser.ReadData(text.text, stringWeight, numWeight, checkWeight);
+        
         Transform layoutGroup = testLayout;
         GameObject.Instantiate(lineSegmentUI, layoutGroup);
         for (int i = 0, rowsCount = rows.Count; i < rowsCount; i++)
         {
             LineData row = rows[i];
 
-            if(row.listing == LineData.ListType.Start || row.listing == LineData.ListType.End)
+            if (row.listing == LineData.ListType.Start || row.listing == LineData.ListType.End)
             {
                 continue;
             }
@@ -74,18 +80,18 @@ public class StatBlockForm : MonoBehaviour {
             for (int j = 0; j < row.words.Length; j++)
             {
 
-                var word = row.words[j];
+                var text = row.words[j];
 
                 GameObject obj;
                 switch (row.forms[j])
                 {
                     case WordType.StringInput:
                         obj = (GameObject)GameObject.Instantiate(stringInputUI, lineSpacer);
-                        obj.GetComponentsInChildren<Text>()[1].text = word;
+                        obj.GetComponentsInChildren<Text>()[1].text = text;
                         break;
                     case WordType.NumInput:
                         obj = (GameObject)GameObject.Instantiate(numInputUI, lineSpacer);
-                        obj.GetComponentsInChildren<Text>()[1].text = word;
+                        obj.GetComponentsInChildren<Text>()[1].text = text;
                         break;
                     case WordType.Checked:
                         obj = (GameObject)GameObject.Instantiate(checkboxUIOn, lineSpacer);
@@ -95,19 +101,96 @@ public class StatBlockForm : MonoBehaviour {
                         break;
                     case WordType.String:
                         obj = (GameObject)GameObject.Instantiate(textUI, lineSpacer);
-                        obj.GetComponent<Text>().text = word;
+                        obj.GetComponent<Text>().text = text;
                         break;
                     default:
                         break;
                 }
             }
-            
+
 
         }
+
+        StringBuilder sb = new StringBuilder();
+        Debug.Log(rows.Count);
+        for (int i = 0, rowsCount = rows.Count; i < rowsCount; i++)
+        {
+            LineData row = rows[i];
+            if (row.listing == LineData.ListType.Start)
+            {
+                sb.Append("{\n");
+            }
+            else if (row.listing == LineData.ListType.End)
+            {
+                sb.Append("}\n");
+            }
+            else if (row.totalWeight == 0)
+            {
+                continue;
+            }
+            else if (row.totalWeight == -1)
+            {
+                sb.Append("#\n");
+            }
+            else
+            {
+                for (int w = 0, wordCount = row.words.Length; w < wordCount; w++)
+                {
+                    switch (row.forms[w])
+                    {
+                        case WordType.Unchecked:
+                            {
+                                sb.Append("()\t");
+                                break;
+                            }
+                        case WordType.Checked:
+                            {
+                                sb.Append("(*)\t");
+                                break;
+                            }
+                        case WordType.NumInput:
+                            {
+                                sb.Append("[" + row.words[w] + "]\t");
+                                break;
+                            }
+                        case WordType.StringInput:
+                            {
+                                if (row.weights[w] == numWeight)
+                                {
+                                    sb.Append("`");
+                                }
+                                sb.Append("<" + row.words[w] + ">\t");
+                                break;
+                            }
+                        case WordType.String:
+                            {
+                                if (row.weights[w] == numWeight)
+                                {
+                                    sb.Append("`");
+                                }
+                                sb.Append(row.words[w] + "\t");
+                                break;
+                            }
+                    }
+
+                    if (w == wordCount - 1)
+                    {
+                        sb.Append("\n");
+                    }
+                }
+            }
+        }
+
+        string str = sb.ToString();
+        Debug.Log(str);
+        StreamWriter writer = new StreamWriter(savePath, true);
+        writer.Write(str);
+        writer.Close();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }
