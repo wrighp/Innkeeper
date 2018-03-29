@@ -47,29 +47,29 @@ public class LineData
         {
             if (words[i].Length > 1 && words[i][0] == '/' && words[i][1] == '/')
             {
-                Debug.Log("Comment");
+                //Debug.Log("Comment");
                 break;
             }
             else if (words[i].Length > 0 && words[i][0] == '\n')
             {
-                Debug.Log("Newline");
+                //Debug.Log("Newline");
                 break;
             }
             else if (i == 0 && words[i].Length > 0 && words[i][0] == '#')
             {
-                Debug.Log("Hash");
+                //Debug.Log("Hash");
                 totalWeight = -1;
                 break;
             }
             else if (i == 0 && words[i].Length > 0 && words[i][0] == '{')
             {
-                Debug.Log("List Start");
+                //Debug.Log("List Start");
                 listing = ListType.Start;
                 break;
             }
             else if (i == 0 && words[i].Length > 0 && words[i][0] == '}')
             {
-                Debug.Log("List End");
+                //Debug.Log("List End");
                 listing = ListType.End;
                 break;
             }
@@ -181,7 +181,7 @@ public static class StatBlockParser
     public static string LineDataToString(List<LineData> rows, int sw, int numWeight, int cw)
     {
         StringBuilder sb = new StringBuilder();
-        Debug.Log(rows.Count);
+        //Debug.Log(rows.Count);
         for (int i = 0, rowsCount = rows.Count; i < rowsCount; i++)
         {
             LineData row = rows[i];
