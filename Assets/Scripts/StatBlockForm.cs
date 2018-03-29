@@ -53,7 +53,7 @@ public class StatBlockForm : MonoBehaviour
          *                   space. totalWeight = 0 indicates this line
          *                   is not visible
          */
-        List<LineData> rows = StatBlockParser.ReadData(text.text, stringWeight, numWeight, checkWeight);
+        List<LineData> rows = StatBlockParser.StringToLineData(text.text, stringWeight, numWeight, checkWeight);
         
         Transform layoutGroup = testLayout;
         GameObject.Instantiate(lineSegmentUI, layoutGroup);
@@ -108,84 +108,10 @@ public class StatBlockForm : MonoBehaviour
                 }
             }
 
-
         }
 
-        StringBuilder sb = new StringBuilder();
-        Debug.Log(rows.Count);
-        for (int i = 0, rowsCount = rows.Count; i < rowsCount; i++)
-        {
-            LineData row = rows[i];
-            if (row.listing == LineData.ListType.Start)
-            {
-                sb.Append("{\n");
-            }
-            else if (row.listing == LineData.ListType.End)
-            {
-                sb.Append("}\n");
-            }
-            else if (row.totalWeight == 0)
-            {
-                continue;
-            }
-            else if (row.totalWeight == -1)
-            {
-                sb.Append("#\n");
-            }
-            else
-            {
-                for (int w = 0, wordCount = row.words.Length; w < wordCount; w++)
-                {
-                    switch (row.forms[w])
-                    {
-                        case WordType.Unchecked:
-                            {
-                                sb.Append("()\t");
-                                break;
-                            }
-                        case WordType.Checked:
-                            {
-                                sb.Append("(*)\t");
-                                break;
-                            }
-                        case WordType.NumInput:
-                            {
-                                sb.Append("[" + row.words[w] + "]\t");
-                                break;
-                            }
-                        case WordType.StringInput:
-                            {
-                                if (row.weights[w] == numWeight)
-                                {
-                                    sb.Append("`");
-                                }
-                                sb.Append("<" + row.words[w] + ">\t");
-                                break;
-                            }
-                        case WordType.String:
-                            {
-                                if (row.weights[w] == numWeight)
-                                {
-                                    sb.Append("`");
-                                }
-                                sb.Append(row.words[w] + "\t");
-                                break;
-                            }
-                    }
-
-                    if (w == wordCount - 1)
-                    {
-                        sb.Append("\n");
-                    }
-                }
-            }
-        }
-
-        string str = sb.ToString();
-        Debug.Log(str);
-        StreamWriter writer = new StreamWriter(savePath, true);
-        writer.Write(str);
-        writer.Close();
+        Debug.Log(StatBlockParser.LineDataToString(rows, stringWeight, numWeight, checkWeight));
+        
     }
 
     // Update is called once per frame

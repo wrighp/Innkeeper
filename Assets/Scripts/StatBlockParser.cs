@@ -3,6 +3,7 @@ using UnityEditor;
 using System.IO;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 public enum WordType
 {
@@ -162,7 +163,7 @@ public class LineData
 
 public static class StatBlockParser
 {
-    public static List<LineData> ReadData(string text, int sw, int nw, int cw)
+    public static List<LineData> StringToLineData(string text, int sw, int nw, int cw)
     {
         List<LineData> rows = new List<LineData>();
         using (StringReader sr = new StringReader(text))
@@ -175,5 +176,80 @@ public static class StatBlockParser
         }
 
         return rows;
+    }
+
+    public static string LineDataToString(List<LineData> rows, int sw, int numWeight, int cw)
+    {
+        StringBuilder sb = new StringBuilder();
+        Debug.Log(rows.Count);
+        for (int i = 0, rowsCount = rows.Count; i < rowsCount; i++)
+        {
+            LineData row = rows[i];
+            if (row.listing == LineData.ListType.Start)
+            {
+                sb.Append("{\n");
+            }
+            else if (row.listing == LineData.ListType.End)
+            {
+                sb.Append("}\n");
+            }
+            else if (row.totalWeight == 0)
+            {
+                continue;
+            }
+            else if (row.totalWeight == -1)
+            {
+                sb.Append("#\n");
+            }
+            else
+            {
+                for (int w = 0, wordCount = row.words.Length; w < wordCount; w++)
+                {
+                    switch (row.forms[w])
+                    {
+                        case WordType.Unchecked:
+                            {
+                                sb.Append("()\t");
+                                break;
+                            }
+                        case WordType.Checked:
+                            {
+                                sb.Append("(*)\t");
+                                break;
+                            }
+                        case WordType.NumInput:
+                            {
+                                sb.Append("[" + row.words[w] + "]\t");
+                                break;
+                            }
+                        case WordType.StringInput:
+                            {
+                                if (row.weights[w] == numWeight)
+                                {
+                                    sb.Append("`");
+                                }
+                                sb.Append("<" + row.words[w] + ">\t");
+                                break;
+                            }
+                        case WordType.String:
+                            {
+                                if (row.weights[w] == numWeight)
+                                {
+                                    sb.Append("`");
+                                }
+                                sb.Append(row.words[w] + "\t");
+                                break;
+                            }
+                    }
+
+                    if (w == wordCount - 1)
+                    {
+                        sb.Append("\n");
+                    }
+                }
+            }
+        }
+
+        return sb.ToString();
     }
 }
