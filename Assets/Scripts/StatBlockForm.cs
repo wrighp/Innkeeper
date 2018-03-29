@@ -110,7 +110,7 @@ public class StatBlockForm : MonoBehaviour
 
         }
 
-        Debug.Log(StatBlockParser.LineDataToString(rows, stringWeight, numWeight, checkWeight));
+        //Debug.Log(StatBlockParser.LineDataToString(rows, stringWeight, numWeight, checkWeight));
         
     }
 
