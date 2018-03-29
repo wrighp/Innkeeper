@@ -13,13 +13,6 @@ public enum WordType
     String
 }
 
-public enum ListType
-{
-    Start,
-    End,
-    None
-}
-
 public class LineData
 {
     public string[] words;
@@ -31,6 +24,13 @@ public class LineData
     public int stringWeight;
     public int numWeight;
     public int checkWeight;
+
+    public enum ListType
+    {
+        Start,
+        End,
+        None
+    }
 
     public LineData(string input, int sw, int nw, int cw)
     {
@@ -119,7 +119,7 @@ public class LineData
                             break;
                         }
 
-                    case WordType.StringInput: 
+                    case WordType.StringInput:
                         {
                             weights.Add(stringWeight);
                             break;
@@ -149,22 +149,26 @@ public class LineData
                 weights.Add(numWeight);
             }
             totalWeight += weights[i];
-            Debug.Log(words[i] + weights[i] + forms[i]);
+            if (totalWeight > 0)
+            {
+                Debug.Log(words[i] + weights[i] + forms[i]);
+            }
         }
-        Debug.Log("totalweight: " + totalWeight);
+        //Debug.Log("totalweight: " + totalWeight);
+        //Debug.Log("" + words.Length + weights.Count + forms.Count);
     }
 
 };
 
 public static class StatBlockParser
 {
-    public static List<LineData> ReadData(TextAsset textAsset, int sw, int nw, int cw)
+    public static List<LineData> ReadData(string text, int sw, int nw, int cw)
     {
         List<LineData> rows = new List<LineData>();
-        using (StringReader sr = new StringReader(textAsset.ToString()))
+        using (StringReader sr = new StringReader(text))
         {
             string line;
-            while((line = sr.ReadLine()) != null)
+            while ((line = sr.ReadLine()) != null)
             {
                 rows.Add(new LineData(line, sw, nw, cw));
             }
