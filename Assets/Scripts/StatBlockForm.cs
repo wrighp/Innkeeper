@@ -47,7 +47,7 @@ public class StatBlockForm : MonoBehaviour {
          *                   space. totalWeight = 0 indicates this line
          *                   is not visible
          */
-        List<LineData> rows = StatBlockParser.ReadData(text, stringWeight, numWeight, checkWeight);
+        List<LineData> rows = StatBlockParser.ReadData(text.ToString(), stringWeight, numWeight, checkWeight);
 
         Transform layoutGroup = testLayout;
         GameObject.Instantiate(lineSegmentUI, layoutGroup);
@@ -74,18 +74,18 @@ public class StatBlockForm : MonoBehaviour {
             for (int j = 0; j < row.words.Length; j++)
             {
 
-                var text = row.words[j];
+                var word = row.words[j];
 
                 GameObject obj;
                 switch (row.forms[j])
                 {
                     case WordType.StringInput:
                         obj = (GameObject)GameObject.Instantiate(stringInputUI, lineSpacer);
-                        obj.GetComponentsInChildren<Text>()[1].text = text;
+                        obj.GetComponentsInChildren<Text>()[1].text = word;
                         break;
                     case WordType.NumInput:
                         obj = (GameObject)GameObject.Instantiate(numInputUI, lineSpacer);
-                        obj.GetComponentsInChildren<Text>()[1].text = text;
+                        obj.GetComponentsInChildren<Text>()[1].text = word;
                         break;
                     case WordType.Checked:
                         obj = (GameObject)GameObject.Instantiate(checkboxUIOn, lineSpacer);
@@ -95,7 +95,7 @@ public class StatBlockForm : MonoBehaviour {
                         break;
                     case WordType.String:
                         obj = (GameObject)GameObject.Instantiate(textUI, lineSpacer);
-                        obj.GetComponent<Text>().text = text;
+                        obj.GetComponent<Text>().text = word;
                         break;
                     default:
                         break;
