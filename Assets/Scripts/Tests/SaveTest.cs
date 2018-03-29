@@ -7,10 +7,20 @@ using System;
 public class SaveTest : MonoBehaviour
 {
     [Serializable]
-    public class SaveTestData
+    public class SaveTestData : ISerializationCallbackReceiver
     {
         public string text;
         public int num;
+
+        public void OnBeforeSerialize()
+        {
+           // Debug.Log("OnBeforeSerialize");
+        }
+
+        public void OnAfterDeserialize()
+        {
+          // Debug.Log("OnAfterDeserialize");
+        }
     }
 
     public SaveTestData data;
