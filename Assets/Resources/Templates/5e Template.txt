@@ -54,7 +54,9 @@ Passive Wisdom(Perception):	[]
 
 //Proficiencies/Languages:
 Proficiencies and Languages:
-{<>}
+{
+<>
+}
 
 //HP, Armor, Speed
 Armor Class:	[]
@@ -76,14 +78,20 @@ Failure:	()	()	()
 //Attacks
 Attacks
 Name	`Attack Bonus	`Damage/Type
-{<>	<>	<>}
+{
+<>	<>	<>
+}
 #
 Notes
-{<>}
+{
+<>
+}
 
 //Equipment & Money
 Equipment
-{<>}
+{
+<>
+}
 
 Money
 CP: []
@@ -94,24 +102,40 @@ PP:	[]
 
 //Character details, special abilities
 Personality Traits
-{<>}
+{
+<>
+}
 Ideals
-{<>}
+{
+<>
+}
 Bonds
-{<>}
+{
+<>
+}
 Flaws
-{<>}
+{
+<>
+}
 
 Features, Traits & Abilities
-{<>}
+{
+<>
+}
 
 //Additional information
 Allies & Organizations
-{<>}
+{
+<>
+}
 Backstory
-{<>}
+{
+<>
+}
 Treasure
-{<>}
+{
+<>
+}
 
 //Spellcasting
 Spellcasting Ability: <>
@@ -134,23 +158,43 @@ Spell Level	`Total Slots	`Expended Slots
 Spells Known
 Name	`Prepared
 0
-{<>}
+{
+<>
+}
 1
-{<>	()}
+{
+<>	()
+}
 2
-{<>	()}
+{
+<>	()
+}
 3
-{<>	()}
+{
+<>	()
+}
 4
-{<>	()}
+{
+<>	()
+}
 5
-{<>	()}
+{
+<>	()
+}
 6
-{<>	()}
+{
+<>	()
+}
 7
-{<>	()}
+{
+<>	()
+}
 8
-{<>	()}
+{
+<>	()
+}
 9
-{<>	()}
+{
+<>	()
+}
 #

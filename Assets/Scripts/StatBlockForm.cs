@@ -29,7 +29,7 @@ public class StatBlockForm : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        CreateStatBlock(new StatBlockUIData());
     }
 
     public void CreateTestStatBlock()

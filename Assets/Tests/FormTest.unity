@@ -1610,7 +1610,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1814626983}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.96875
+  m_Size: 0.9734375
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1878,7 +1878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testLayout: {fileID: 89415333}
-  textAsset: {fileID: 0}
+  textAsset: {fileID: 4900000, guid: 766e19479a9690e4099f9a2fb51d317c, type: 3}
   savePath: 
   stringWeight: 3
   numWeight: 3
