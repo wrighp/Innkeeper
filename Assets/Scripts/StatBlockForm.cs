@@ -149,6 +149,56 @@ public class StatBlockForm : MonoBehaviour
         List<LineData> rows = new List<LineData>();
         //Loop through UI elements and convert to list of linedata
 
+        for (int i = 0; i < testLayout.childCount; ++i)
+        {
+            LineData lD = new LineData();
+            List<string> words = new List<string>();
+            Transform t = testLayout.GetChild(i);
+
+            for (int j = 0; j < t.childCount; ++j)
+            {
+                Transform child = t.GetChild(j);
+                switch (child.tag) {
+                    case "Input":
+                        lD.forms.Add(WordType.StringInput);
+                        words.Add(child.GetChild(1).GetComponent<Text>().text);
+                        break;
+                    case "NumInput":
+                        lD.forms.Add(WordType.NumInput);
+                        words.Add(child.GetChild(1).GetComponent<Text>().text);
+                        break;
+                    case "Text":
+                        lD.forms.Add(WordType.String);
+                        words.Add(child.GetComponent<Text>().text);
+                        break;
+                    case "ToggleOn":
+                        lD.forms.Add(WordType.Checked);
+                        words.Add("on");
+                        break;
+                    case "ToggleOff":
+                        lD.forms.Add(WordType.Unchecked);
+                        words.Add("off");
+                        break;
+                    default:
+                        Debug.LogError("Invalid type passed to CreateStatBlockUiData");
+                        break;
+                }
+
+            }
+
+            //If empty line spacer set the total weight to 0
+            if (t.childCount == 0)
+            {
+                lD.totalWeight = 0;
+            }
+
+            //Set weights
+            lD.stringWeight = stringWeight;
+            lD.numWeight = numWeight;
+            lD.checkWeight = checkWeight;
+
+            rows.Add(lD);
+        }
 
 
         uiData.text = StatBlockParser.LineDataToString(rows, stringWeight, numWeight, checkWeight);

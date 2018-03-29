@@ -33,6 +33,8 @@ public class LineData
         None
     }
 
+    public LineData() {}
+
     public LineData(string input, int sw, int nw, int cw)
     {
         stringWeight = sw;
