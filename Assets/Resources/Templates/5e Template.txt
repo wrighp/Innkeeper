@@ -94,8 +94,8 @@ Equipment
 }
 
 Money
-CP: []
-SP: []
+CP:	[]
+SP:	[]
 EP:	[]
 GP:	[]
 PP:	[]
@@ -139,8 +139,8 @@ Treasure
 
 //Spellcasting
 Spellcasting Ability: <>
-Save DC: []
-Spell Attack Bonus: []
+Save DC:	[]
+Spell Attack Bonus:	[]
 
 Spells
 Spell Level	`Total Slots	`Expended Slots
@@ -159,7 +159,7 @@ Spells Known
 Name	`Prepared
 0
 {
-<>
+<> []
 }
 1
 {
