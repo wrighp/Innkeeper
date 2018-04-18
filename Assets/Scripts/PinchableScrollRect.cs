@@ -51,10 +51,9 @@
              Vector2 pivotPosition = new Vector3(content.pivot.x * content.rect.size.x, content.pivot.y * content.rect.size.y);
              Vector2 posFromBottomLeft = pivotPosition + _startPinchCenterPosition;
          }
-         //pc input end
- 
-         if (Mathf.Abs(content.localScale.x - _currentZoom) > 0.001f)
-             content.localScale = Vector3.Lerp(content.localScale, Vector3.one * _currentZoom, _zoomLerpSpeed * Time.deltaTime);
+        //pc input end
+        if (Mathf.Abs(content.localScale.x - _currentZoom) > 0.001f)
+            content.localScale = Vector3.Lerp(content.localScale, Vector3.one * _currentZoom, _zoomLerpSpeed * Time.deltaTime);
      }
  
      protected override void SetContentAnchoredPosition(Vector2 position)
