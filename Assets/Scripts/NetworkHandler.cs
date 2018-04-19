@@ -53,7 +53,7 @@ public class NetworkHandler : NetworkBehaviour
     {
         foreach(GameObject page in pages.Values)
         {
-            DestroyPage(page);
+            Destroy(page);
         }
         pages.Clear();
     }
@@ -117,7 +117,6 @@ public class NetworkHandler : NetworkBehaviour
     /// <param name="packet"></param>
     public void CmdSendPagePacket(PagePacket packet)
     {
-
         //Override value in list if page name already exists
         string name = packet.name;
         for(int i = 0; i < pageSyncList.Count; i++)

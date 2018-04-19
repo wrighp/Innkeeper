@@ -1,0 +1,1053 @@
+//D&D 5e Character Sheet
+//Essential Character information
+Character Name
+asshole
+Class/Level
+
+Player Name
+
+Background
+
+Race
+
+Alignment
+
+Experience Points
+
+
+//Ability Scores, Proficiency, Inspiration
+Proficiency Bonus:
+
+Inspiration:
+
+
+Ability Scores
+Ability
+Score
+Modifier
+Temp Score
+Temp Modifier
+STR
+
+
+
+
+DEX
+
+
+
+
+CON
+
+
+
+
+INT
+
+
+
+
+WIS
+
+
+
+
+CHA
+
+
+
+
+#
+
+//Saving throws:
+Saving Throws
+Ability
+Proficiency
+Score
+STR
+
+
+DEX
+
+
+CON
+
+
+INT
+
+
+WIS
+
+
+CHA
+
+
+#
+
+//Skills
+Skills
+Skill
+Proficiency
+Score
+Acrobatics(DEX)
+
+
+Animal Handling(WIS)
+
+
+Arcana(INT)
+
+
+Athletics(STR)
+
+
+Deception(CHA)
+
+
+History(INT)
+
+
+Insight(WIS)
+
+
+Intimidation(CHA)
+
+
+Investigation(INT)
+
+
+Medicine(WIS)
+
+
+Nature(INT)
+
+
+Perception(WIS)
+
+
+Performance(CHA)
+
+
+Persuasion(CHA)
+
+
+Religion(INT)
+
+
+Slight of Hand(DEX)
+
+
+Stealth(DEX)
+
+
+Survival(WIS)
+
+
+#
+Passive Wisdom(Perception):
+
+
+//Proficiencies/Languages:
+Proficiencies and Languages:
+{
+
+}
+
+//HP, Armor, Speed
+Armor Class:
+
+Initiative:
+
+Speed:
+
+
+Hit Points
+Maximum
+Current
+Temporary
+
+
+
+#
+Hit Dice
+Total
+Current
+
+
+#
+Death Saving Throws
+Success:
+
+
+
+Failure:
+
+
+
+
+//Attacks
+Attacks
+Name
+Attack Bonus
+Damage/Type
+{
+
+
+
+}
+#
+Notes
+{
+
+}
+
+//Equipment & Money
+Equipment
+{
+
+}
+
+Money
+CP:
+
+SP:
+
+EP:
+
+GP:
+
+PP:
+
+
+//Character details, special abilities
+Personality Traits
+{
+
+}
+Ideals
+{
+
+}
+Bonds
+{
+
+}
+Flaws
+{
+
+}
+
+Features, Traits & Abilities
+{
+
+}
+
+//Additional information
+Allies & Organizations
+{
+
+}
+Backstory
+{
+
+}
+Treasure
+{
+
+}
+
+//Spellcasting
+Spellcasting Ability: <>
+Save DC:
+
+Spell Attack Bonus:
+
+
+Spells
+Spell Level
+Total Slots
+Expended Slots
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+#
+
+Spells Known
+Name
+Prepared
+0
+{
+<> []
+}
+1
+{
+
+
+}
+2
+{
+
+
+}
+3
+{
+
+
+}
+4
+{
+
+
+}
+5
+{
+
+
+}
+6
+{
+
+
+}
+7
+{
+
+
+}
+8
+{
+
+
+}
+9
+{
+
+
+}
+#
+//D&D 5e Character Sheet
+//Essential Character information
+Character Name
+asshole
+Class/Level
+
+Player Name
+
+Background
+
+Race
+
+Alignment
+
+Experience Points
+
+
+//Ability Scores, Proficiency, Inspiration
+Proficiency Bonus:
+
+Inspiration:
+
+
+Ability Scores
+Ability
+Score
+Modifier
+Temp Score
+Temp Modifier
+STR
+
+
+
+
+DEX
+
+
+
+
+CON
+
+
+
+
+INT
+
+
+
+
+WIS
+
+
+
+
+CHA
+
+
+
+
+#
+
+//Saving throws:
+Saving Throws
+Ability
+Proficiency
+Score
+STR
+
+
+DEX
+
+
+CON
+
+
+INT
+
+
+WIS
+
+
+CHA
+
+
+#
+
+//Skills
+Skills
+Skill
+Proficiency
+Score
+Acrobatics(DEX)
+
+
+Animal Handling(WIS)
+
+
+Arcana(INT)
+
+
+Athletics(STR)
+
+
+Deception(CHA)
+
+
+History(INT)
+
+
+Insight(WIS)
+
+
+Intimidation(CHA)
+
+
+Investigation(INT)
+
+
+Medicine(WIS)
+
+
+Nature(INT)
+
+
+Perception(WIS)
+
+
+Performance(CHA)
+
+
+Persuasion(CHA)
+
+
+Religion(INT)
+
+
+Slight of Hand(DEX)
+
+
+Stealth(DEX)
+
+
+Survival(WIS)
+
+
+#
+Passive Wisdom(Perception):
+
+
+//Proficiencies/Languages:
+Proficiencies and Languages:
+{
+
+}
+
+//HP, Armor, Speed
+Armor Class:
+
+Initiative:
+
+Speed:
+
+
+Hit Points
+Maximum
+Current
+Temporary
+
+
+
+#
+Hit Dice
+Total
+Current
+
+
+#
+Death Saving Throws
+Success:
+
+
+
+Failure:
+
+
+
+
+//Attacks
+Attacks
+Name
+Attack Bonus
+Damage/Type
+{
+
+
+
+}
+#
+Notes
+{
+
+}
+
+//Equipment & Money
+Equipment
+{
+
+}
+
+Money
+CP:
+
+SP:
+
+EP:
+
+GP:
+
+PP:
+
+
+//Character details, special abilities
+Personality Traits
+{
+
+}
+Ideals
+{
+
+}
+Bonds
+{
+
+}
+Flaws
+{
+
+}
+
+Features, Traits & Abilities
+{
+
+}
+
+//Additional information
+Allies & Organizations
+{
+
+}
+Backstory
+{
+
+}
+Treasure
+{
+
+}
+
+//Spellcasting
+Spellcasting Ability: <>
+Save DC:
+
+Spell Attack Bonus:
+
+
+Spells
+Spell Level
+Total Slots
+Expended Slots
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+#
+
+Spells Known
+Name
+Prepared
+0
+{
+<> []
+}
+1
+{
+
+
+}
+2
+{
+
+
+}
+3
+{
+
+
+}
+4
+{
+
+
+}
+5
+{
+
+
+}
+6
+{
+
+
+}
+7
+{
+
+
+}
+8
+{
+
+
+}
+9
+{
+
+
+}
+#
+//D&D 5e Character Sheet
+//Essential Character information
+Character Name
+asshole
+Class/Level
+
+Player Name
+
+Background
+
+Race
+
+Alignment
+
+Experience Points
+
+
+//Ability Scores, Proficiency, Inspiration
+Proficiency Bonus:
+
+Inspiration:
+
+
+Ability Scores
+Ability
+Score
+Modifier
+Temp Score
+Temp Modifier
+STR
+
+
+
+
+DEX
+
+
+
+
+CON
+
+
+
+
+INT
+
+
+
+
+WIS
+
+
+
+
+CHA
+
+
+
+
+#
+
+//Saving throws:
+Saving Throws
+Ability
+Proficiency
+Score
+STR
+
+
+DEX
+
+
+CON
+
+
+INT
+
+
+WIS
+
+
+CHA
+
+
+#
+
+//Skills
+Skills
+Skill
+Proficiency
+Score
+Acrobatics(DEX)
+
+
+Animal Handling(WIS)
+
+
+Arcana(INT)
+
+
+Athletics(STR)
+
+
+Deception(CHA)
+
+
+History(INT)
+
+
+Insight(WIS)
+
+
+Intimidation(CHA)
+
+
+Investigation(INT)
+
+
+Medicine(WIS)
+
+
+Nature(INT)
+
+
+Perception(WIS)
+
+
+Performance(CHA)
+
+
+Persuasion(CHA)
+
+
+Religion(INT)
+
+
+Slight of Hand(DEX)
+
+
+Stealth(DEX)
+
+
+Survival(WIS)
+
+
+#
+Passive Wisdom(Perception):
+
+
+//Proficiencies/Languages:
+Proficiencies and Languages:
+{
+
+}
+
+//HP, Armor, Speed
+Armor Class:
+
+Initiative:
+
+Speed:
+
+
+Hit Points
+Maximum
+Current
+Temporary
+
+
+
+#
+Hit Dice
+Total
+Current
+
+
+#
+Death Saving Throws
+Success:
+
+
+
+Failure:
+
+
+
+
+//Attacks
+Attacks
+Name
+Attack Bonus
+Damage/Type
+{
+
+
+
+}
+#
+Notes
+{
+
+}
+
+//Equipment & Money
+Equipment
+{
+
+}
+
+Money
+CP:
+
+SP:
+
+EP:
+
+GP:
+
+PP:
+
+
+//Character details, special abilities
+Personality Traits
+{
+
+}
+Ideals
+{
+
+}
+Bonds
+{
+
+}
+Flaws
+{
+
+}
+
+Features, Traits & Abilities
+{
+
+}
+
+//Additional information
+Allies & Organizations
+{
+
+}
+Backstory
+{
+
+}
+Treasure
+{
+
+}
+
+//Spellcasting
+Spellcasting Ability: <>
+Save DC:
+
+Spell Attack Bonus:
+
+
+Spells
+Spell Level
+Total Slots
+Expended Slots
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+#
+
+Spells Known
+Name
+Prepared
+0
+{
+<> []
+}
+1
+{
+
+
+}
+2
+{
+
+
+}
+3
+{
+
+
+}
+4
+{
+
+
+}
+5
+{
+
+
+}
+6
+{
+
+
+}
+7
+{
+
+
+}
+8
+{
+
+
+}
+9
+{
+
+
+}
+#

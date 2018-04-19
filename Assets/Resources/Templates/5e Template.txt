@@ -1,5 +1,3 @@
-//D&D 5e Character Sheet
-//Essential Character information
 Character Name	<>	Class/Level	<>	Player Name	<>
 Background	<>	Race	<>	Alignment	<>	Experience Points	[]
 

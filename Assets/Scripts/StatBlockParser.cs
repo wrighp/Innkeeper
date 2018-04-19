@@ -32,7 +32,10 @@ public class LineData
         None
     }
 
-    public LineData() {}
+    public LineData() {
+        weights = new List<int>();
+        forms = new List<WordType>();
+    }
 
     public LineData(string input, int sw, int nw, int cw)
     {
@@ -153,10 +156,11 @@ public class LineData
             totalWeight += weights[i];
             if (totalWeight > 0)
             {
-                Debug.Log(words[i] + weights[i] + forms[i]);
+                //Debug.Log(words[i] + weights[i] + forms[i]);
             }
         }
-        //Debug.Log("totalweight: " + totalWeight);
+         
+        Debug.Log("totalweight: " + totalWeight);
         //Debug.Log("" + words.Length + weights.Count + forms.Count);
     }
 
@@ -175,7 +179,7 @@ public static class StatBlockParser
                 rows.Add(new LineData(line, sw, nw, cw));
             }
         }
-
+        //WriteString(LineDataToString(rows,sw,nw,cw), "dsf.txt");
         return rows;
     }
 
@@ -194,10 +198,11 @@ public static class StatBlockParser
             {
                 sb.Append("}\n");
             }
-            else if (row.totalWeight == 0)
-            {
-                continue;
-            }
+            //else if (row.totalWeight == 0)
+            //{
+            //    Debug.Log("Sorry nothing");
+            //    continue;
+            //}
             else if (row.totalWeight == -1)
             {
                 sb.Append("#\n");
@@ -250,7 +255,19 @@ public static class StatBlockParser
                 }
             }
         }
-
+        WriteString(sb.ToString(), "trust.txt");
         return sb.ToString();
+    }
+
+    static void WriteString(string ld, string name)
+    {
+        string path = "Assets/Resources/" + name;
+
+        //Write some text to the test.txt file
+        StreamWriter writer = new StreamWriter(path, true);
+        writer.Write(ld);
+
+        writer.Close();
+
     }
 }

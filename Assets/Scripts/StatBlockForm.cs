@@ -4,13 +4,14 @@ using System.Text;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class StatBlockForm : MonoBehaviour
 {
 
     public Transform testLayout;
 
-    public string name;
+    public string pageName;
     public TextAsset textAsset;
     public string savePath;
     public int stringWeight;
@@ -71,16 +72,18 @@ public class StatBlockForm : MonoBehaviour
         if(uiData.text == null)
         {
             sourceText = textAsset.text;
-            name = textAsset.name;
         }
         else
         {
             sourceText = uiData.text;
-            name = uiData.name;
         }
+        pageName = uiData.name;
+        gameObject.name = pageName;
 
         List<LineData> rows = StatBlockParser.StringToLineData(sourceText, stringWeight, numWeight, checkWeight);
-        
+
+        //WriteString(rows, "his.txt");
+
         Transform layoutGroup = testLayout;
         GameObject.Instantiate(lineSegmentUI, layoutGroup);
         for (int i = 0, rowsCount = rows.Count; i < rowsCount; i++)
@@ -113,17 +116,21 @@ public class StatBlockForm : MonoBehaviour
                 {
                     case WordType.StringInput:
                         obj = (GameObject)GameObject.Instantiate(stringInputUI, lineSpacer);
-                        obj.GetComponentsInChildren<Text>()[1].text = text;
+                        obj.GetComponent<InputField>().text = text;
+                        obj.GetComponent<InputField>().onEndEdit.AddListener(delegate { PrepareStatPacket(); });
                         break;
                     case WordType.NumInput:
                         obj = (GameObject)GameObject.Instantiate(numInputUI, lineSpacer);
-                        obj.GetComponentsInChildren<Text>()[1].text = text;
+                        obj.GetComponent<InputField>().text = text;
+                        obj.GetComponent<InputField>().onEndEdit.AddListener(delegate { PrepareStatPacket(); });
                         break;
                     case WordType.Checked:
                         obj = (GameObject)GameObject.Instantiate(checkboxUIOn, lineSpacer);
+                        obj.GetComponent<Toggle>().onValueChanged.AddListener(delegate { PrepareStatPacket(); });
                         break;
                     case WordType.Unchecked:
                         obj = (GameObject)GameObject.Instantiate(checkboxUI, lineSpacer);
+                        obj.GetComponent<Toggle>().onValueChanged.AddListener(delegate { PrepareStatPacket(); });
                         break;
                     case WordType.String:
                         obj = (GameObject)GameObject.Instantiate(textUI, lineSpacer);
@@ -141,7 +148,6 @@ public class StatBlockForm : MonoBehaviour
     }
 
     public void PrepareStatPacket() {
-        print("Preparing packet");
         PagePacket packet = new PagePacket();
         packet.name = name;
         packet.pageType = PagePacket.PageType.StatBlockUI;
@@ -149,8 +155,10 @@ public class StatBlockForm : MonoBehaviour
         packet.destroy = false;
         
         foreach (ClientController cc in GameObject.FindObjectsOfType<ClientController>()) {
-            if(cc.isLocalPlayer)
+            if (cc.isLocalPlayer) {
                 cc.CmdSendPagePacket(packet);
+                break;
+            }
         }
     }
 
@@ -163,8 +171,8 @@ public class StatBlockForm : MonoBehaviour
         StatBlockUIData uiData = new StatBlockUIData();
         List<LineData> rows = new List<LineData>();
         //Loop through UI elements and convert to list of linedata
-
-        for (int i = 0; i < testLayout.childCount; ++i)
+        
+        for (int i = 0; i < transform.childCount; ++i)
         {
             LineData lD = new LineData();
             List<string> words = new List<string>();
@@ -176,23 +184,33 @@ public class StatBlockForm : MonoBehaviour
                 switch (child.tag) {
                     case "Input":
                         lD.forms.Add(WordType.StringInput);
-                        words.Add(child.GetChild(1).GetComponent<Text>().text);
+                        words.Add(child.GetComponent<InputField>().text);
+                        lD.totalWeight += stringWeight;
+                        lD.weights.Add(stringWeight);
                         break;
                     case "NumInput":
                         lD.forms.Add(WordType.NumInput);
-                        words.Add(child.GetChild(1).GetComponent<Text>().text);
+                        words.Add(child.GetComponent<InputField>().text);
+                        lD.totalWeight += numWeight;
+                        lD.weights.Add(numWeight);
                         break;
                     case "Text":
                         lD.forms.Add(WordType.String);
                         words.Add(child.GetComponent<Text>().text);
+                        lD.totalWeight += stringWeight;
+                        lD.weights.Add(stringWeight);
                         break;
                     case "ToggleOn":
                         lD.forms.Add(WordType.Checked);
                         words.Add("on");
+                        lD.totalWeight += checkWeight;
+                        lD.weights.Add(checkWeight);
                         break;
                     case "ToggleOff":
                         lD.forms.Add(WordType.Unchecked);
                         words.Add("off");
+                        lD.totalWeight += checkWeight;
+                        lD.weights.Add(checkWeight);
                         break;
                     default:
                         Debug.LogError("Invalid type passed to CreateStatBlockUiData");
@@ -200,7 +218,7 @@ public class StatBlockForm : MonoBehaviour
                 }
 
             }
-
+            lD.words = words.ToArray();
             //If empty line spacer set the total weight to 0
             if (t.childCount == 0)
             {
@@ -211,13 +229,31 @@ public class StatBlockForm : MonoBehaviour
             lD.stringWeight = stringWeight;
             lD.numWeight = numWeight;
             lD.checkWeight = checkWeight;
-
+            print("minetotal:" + lD.totalWeight);
             rows.Add(lD);
         }
-
+        //WriteString(rows, "my.txt");
 
         uiData.text = StatBlockParser.LineDataToString(rows, stringWeight, numWeight, checkWeight);
         return uiData;
+    }
+
+    static void WriteString( List<LineData> ld, string name)
+    {
+        string path = "Assets/Resources/" + name;
+
+        //Write some text to the test.txt file
+        StreamWriter writer = new StreamWriter(path, true);
+
+        foreach(LineData l in ld) {
+            foreach(string s in l.words)
+            {
+                writer.WriteLine(s);
+            }
+        }
+
+        writer.Close();
+
     }
 
 
