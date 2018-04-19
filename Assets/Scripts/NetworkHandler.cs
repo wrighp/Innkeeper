@@ -8,11 +8,12 @@ public class NetworkHandler : NetworkBehaviour
 {
     public static NetworkHandler instance;
     SyncListPagePacket pageSyncList = new SyncListPagePacket();
-    Dictionary<string, GameObject> pages = new Dictionary<string, GameObject>();
-
+    public Dictionary<string, GameObject> pages = new Dictionary<string, GameObject>();
+    public GameObject[] prefabs;
 
     public void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         instance = this;
     }
 
@@ -65,6 +66,10 @@ public class NetworkHandler : NetworkBehaviour
                 {
                     StatBlockUIData uiData = (StatBlockUIData)SerializationManager.LoadObject(packet.data);
                     //Create statblockui
+                    GameObject parent = GameObject.Find("Canvas/Scroll View/Viewport");
+                    GameObject statBlock = Instantiate(prefabs[0], parent.transform);
+                    statBlock.GetComponent<StatBlockForm>().CreateStatBlock(uiData);
+                    pages.Add(packet.name, statBlock);
                     break;
                 }
             default:
@@ -168,6 +173,7 @@ public class SyncListPagePacket : SyncListStruct<PagePacket> { }
 [Serializable]
 public abstract class PageData
 {
+    public string name;
     //On/before/after serialize/deserialize
     //public abstract void OnAfterDeserialize();
     //public abstract void OnBeforeSerialize();

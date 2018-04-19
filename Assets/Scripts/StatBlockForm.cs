@@ -10,7 +10,7 @@ public class StatBlockForm : MonoBehaviour
 
     public Transform testLayout;
 
-
+    public string name;
     public TextAsset textAsset;
     public string savePath;
     public int stringWeight;
@@ -26,15 +26,15 @@ public class StatBlockForm : MonoBehaviour
 
 
     // Use this for initialization
-    void Start()
-    {
-        CreateStatBlock(new StatBlockUIData());
-    }
+    //void Start()
+    //{
+    //    CreateStatBlock(new StatBlockUIData());
+    //}
 
-    public void CreateTestStatBlock()
-    {
-        CreateStatBlock(new StatBlockUIData());
-    }
+    //public void CreateTestStatBlock()
+    //{
+    //    CreateStatBlock(new StatBlockUIData());
+    //}
 
     /// <summary>
     /// Call to create UI elements from StatBlockUIData
@@ -71,10 +71,12 @@ public class StatBlockForm : MonoBehaviour
         if(uiData.text == null)
         {
             sourceText = textAsset.text;
+            name = textAsset.name;
         }
         else
         {
             sourceText = uiData.text;
+            name = uiData.name;
         }
 
         List<LineData> rows = StatBlockParser.StringToLineData(sourceText, stringWeight, numWeight, checkWeight);
@@ -136,6 +138,20 @@ public class StatBlockForm : MonoBehaviour
 
         //Debug.Log(StatBlockParser.LineDataToString(rows, stringWeight, numWeight, checkWeight));
         
+    }
+
+    public void PrepareStatPacket() {
+        print("Preparing packet");
+        PagePacket packet = new PagePacket();
+        packet.name = name;
+        packet.pageType = PagePacket.PageType.StatBlockUI;
+        packet.data = SerializationManager.SerializeObject(this.CreateStatBlockUIData());
+        packet.destroy = false;
+        
+        foreach (ClientController cc in GameObject.FindObjectsOfType<ClientController>()) {
+            if(cc.isLocalPlayer)
+                cc.CmdSendPagePacket(packet);
+        }
     }
 
     /// <summary>
@@ -204,9 +220,5 @@ public class StatBlockForm : MonoBehaviour
         return uiData;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 }
