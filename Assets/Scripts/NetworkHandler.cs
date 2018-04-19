@@ -67,7 +67,7 @@ public class NetworkHandler : NetworkBehaviour
                 {
                     StatBlockUIData uiData = (StatBlockUIData)SerializationManager.LoadObject(packet.data);
                     //Create statblockui
-                    GameObject parent = GameObject.Find("Canvas/Scroll View/Viewport");
+                    GameObject parent = GameObject.Find("Canvas/Page View/Viewport");
                     GameObject statBlock = Instantiate(prefabs[0], parent.transform);
                     statBlock.GetComponent<StatBlockForm>().CreateStatBlock(uiData);
                     pages.Add(packet.name, statBlock);

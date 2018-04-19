@@ -12,7 +12,11 @@ public class PageManager : MonoBehaviour {
     }
 
     void Update() {
-        if(NetworkHandler.instance.pages.Count > 0 && currrentPage == null) {
+        if (NetworkHandler.instance == null)
+        {
+            return;
+        }
+        if (NetworkHandler.instance.pages.Count > 0 && currrentPage == null) {
             foreach (GameObject page in NetworkHandler.instance.pages.Values)
             {
                 currrentPage = page;
