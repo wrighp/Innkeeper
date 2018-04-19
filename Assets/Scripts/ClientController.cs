@@ -17,17 +17,24 @@ public class ClientController : NetworkBehaviour {
     override public void OnStartClient()
     {
         base.OnStartClient();
-        PagePacket packet = new PagePacket();
-        packet.name = "test";
-        packet.pageType = PagePacket.PageType.StatBlockUI;
-        packet.data = SerializationManager.SerializeObject(new StatBlockUIData());
-        packet.destroy = false;
-        CmdSendPagePacket(packet);
+        if(isServer)
+        {
+            print("remaking cascas");
+            PagePacket packet = new PagePacket();
+            packet.name = "test";
+            packet.pageType = PagePacket.PageType.StatBlockUI;
+            StatBlockUIData sbd = new StatBlockUIData();
+            sbd.name = packet.name;
+            packet.data = SerializationManager.SerializeObject(sbd);
+            packet.destroy = false;
+            CmdSendPagePacket(packet);
+        }
     }
 
     [Command]
     public void CmdSendPagePacket(PagePacket packet)
     {
+        //print("PacketNameBeforeSend: " + packet.name);
         NetworkHandler.instance.CmdSendPagePacket(packet);
     }
     [Command]

@@ -160,7 +160,7 @@ public class LineData
             }
         }
          
-        Debug.Log("totalweight: " + totalWeight);
+        //Debug.Log("totalweight: " + totalWeight);
         //Debug.Log("" + words.Length + weights.Count + forms.Count);
     }
 
@@ -179,7 +179,6 @@ public static class StatBlockParser
                 rows.Add(new LineData(line, sw, nw, cw));
             }
         }
-        //WriteString(LineDataToString(rows,sw,nw,cw), "dsf.txt");
         return rows;
     }
 
@@ -255,19 +254,6 @@ public static class StatBlockParser
                 }
             }
         }
-        WriteString(sb.ToString(), "trust.txt");
         return sb.ToString();
-    }
-
-    static void WriteString(string ld, string name)
-    {
-        string path = "Assets/Resources/" + name;
-
-        //Write some text to the test.txt file
-        StreamWriter writer = new StreamWriter(path, true);
-        writer.Write(ld);
-
-        writer.Close();
-
     }
 }

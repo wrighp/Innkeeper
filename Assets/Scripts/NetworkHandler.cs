@@ -39,6 +39,7 @@ public class NetworkHandler : NetworkBehaviour
     private void RebuildAllPages()
     {
         ClearPages();
+        print("Sycnlist: " + pageSyncList.Count);
         for(int i = 0; i < pageSyncList.Count; i++)
         {
             BuildPage(pageSyncList[i]);
@@ -85,19 +86,6 @@ public class NetworkHandler : NetworkBehaviour
 
     }
 
-    // Use this for initialization
-    void Start()
-    {
-
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     /// <summary>
     /// Function called on server to destroy a page of a given name
     /// </summary>
@@ -118,10 +106,10 @@ public class NetworkHandler : NetworkBehaviour
     public void CmdSendPagePacket(PagePacket packet)
     {
         //Override value in list if page name already exists
-        string name = packet.name;
-        for(int i = 0; i < pageSyncList.Count; i++)
+        //print("PacketNameAfterSend: " + packet.name);
+        for (int i = 0; i < pageSyncList.Count; i++)
         {
-            if (pageSyncList[i].name.Equals(name))
+            if (pageSyncList[i].name.Equals(packet.name))
             {
                 if (packet.destroy)
                 {
@@ -138,6 +126,7 @@ public class NetworkHandler : NetworkBehaviour
         //If not found in list and wasn't destroyed add to list
         if (!packet.destroy)
         {
+            //print("Added Packet: " + packet.name);
             pageSyncList.Add(packet);
         }
         else
@@ -146,11 +135,6 @@ public class NetworkHandler : NetworkBehaviour
         }
         return;
     }
-
-
-
-
-
 }
 
 /// <summary>

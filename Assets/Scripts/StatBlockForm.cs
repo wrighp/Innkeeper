@@ -1,10 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 
 public class StatBlockForm : MonoBehaviour
 {
@@ -24,18 +20,6 @@ public class StatBlockForm : MonoBehaviour
     public GameObject checkboxUIOn;
     public GameObject stringInputUI;
     public GameObject numInputUI;
-
-
-    // Use this for initialization
-    //void Start()
-    //{
-    //    CreateStatBlock(new StatBlockUIData());
-    //}
-
-    //public void CreateTestStatBlock()
-    //{
-    //    CreateStatBlock(new StatBlockUIData());
-    //}
 
     /// <summary>
     /// Call to create UI elements from StatBlockUIData
@@ -77,12 +61,11 @@ public class StatBlockForm : MonoBehaviour
         {
             sourceText = uiData.text;
         }
+        print(uiData.name);
         pageName = uiData.name;
         gameObject.name = pageName;
 
         List<LineData> rows = StatBlockParser.StringToLineData(sourceText, stringWeight, numWeight, checkWeight);
-
-        //WriteString(rows, "his.txt");
 
         Transform layoutGroup = testLayout;
         GameObject.Instantiate(lineSegmentUI, layoutGroup);
@@ -148,8 +131,11 @@ public class StatBlockForm : MonoBehaviour
     }
 
     public void PrepareStatPacket() {
+        if (pageName == "") return;
+        print("Prepare stat packet");
         PagePacket packet = new PagePacket();
-        packet.name = name;
+        packet.name = pageName;
+        print("PageName: " + pageName);
         packet.pageType = PagePacket.PageType.StatBlockUI;
         packet.data = SerializationManager.SerializeObject(this.CreateStatBlockUIData());
         packet.destroy = false;
@@ -169,6 +155,7 @@ public class StatBlockForm : MonoBehaviour
     public StatBlockUIData CreateStatBlockUIData()
     {
         StatBlockUIData uiData = new StatBlockUIData();
+        uiData.name = pageName;
         List<LineData> rows = new List<LineData>();
         //Loop through UI elements and convert to list of linedata
         
@@ -229,7 +216,6 @@ public class StatBlockForm : MonoBehaviour
             lD.stringWeight = stringWeight;
             lD.numWeight = numWeight;
             lD.checkWeight = checkWeight;
-            print("minetotal:" + lD.totalWeight);
             rows.Add(lD);
         }
         //WriteString(rows, "my.txt");
@@ -237,24 +223,4 @@ public class StatBlockForm : MonoBehaviour
         uiData.text = StatBlockParser.LineDataToString(rows, stringWeight, numWeight, checkWeight);
         return uiData;
     }
-
-    static void WriteString( List<LineData> ld, string name)
-    {
-        string path = "Assets/Resources/" + name;
-
-        //Write some text to the test.txt file
-        StreamWriter writer = new StreamWriter(path, true);
-
-        foreach(LineData l in ld) {
-            foreach(string s in l.words)
-            {
-                writer.WriteLine(s);
-            }
-        }
-
-        writer.Close();
-
-    }
-
-
 }
