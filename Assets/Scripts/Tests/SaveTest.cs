@@ -28,7 +28,7 @@ public class SaveTest : MonoBehaviour
 
     public void Awake()
     {
-        path = Path.Combine(Application.persistentDataPath, "test" + ".tst");
+        path = SerializationManager.CreatePath("test" + ".tst");
     }
 
     public void ClearData()

@@ -16,7 +16,7 @@ public static class SerializationManager
 
     public static string CreatePath(string filename)
     {
-        return Path.Combine(Application.persistentDataPath, filename);
+        return Path.Combine(Application.persistentDataPath, "SaveData/"+filename);
     }
 
     public static byte[] SerializeObject(object graph)
@@ -50,7 +50,19 @@ public static class SerializationManager
     {
 
         BinaryFormatter formatter = new BinaryFormatter();
+        string folderPath = Path.GetDirectoryName(path);
+        try
+        {
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
 
+        }
+        catch (IOException)
+        {
+            return false;
+        }
         using (FileStream stream = new FileStream(path, FileMode.Create))
         {
             formatter.SurrogateSelector = Selector;
