@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NetworkHandler : NetworkBehaviour
 {
@@ -165,7 +166,6 @@ public abstract class PageData
 [Serializable]
 public class SharedImageData : PageData
 {
-
     //ImageConversion.LoadImage(Texture2D, data);
 }
 
@@ -178,5 +178,29 @@ public class StatBlockUIData : PageData
 [Serializable]
 public class MapData : PageData
 {
+    public string imagePath;
+    public PinData[] pins;
 
+    public MapData(GameObject g)
+    {
+        //Loop through transform for pins and create pindata
+
+    }
+
+}
+
+[Serializable]
+public class PinData
+{
+    public string referencePath;
+    public Color32 color;
+    public Vector3 position;
+
+    public PinData(GameObject g)
+    {
+        //Take pin and convert to save data
+        RectTransform rect = g.GetComponent<RectTransform>();
+        position = rect.position;
+        color = (Color32)g.GetComponent<Image>().color;
+    }
 }
