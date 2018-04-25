@@ -184,7 +184,11 @@ public class MapData : PageData
     public MapData(GameObject g)
     {
         //Loop through transform for pins and create pindata
-
+        List<PinData> lP = new List<PinData>();
+        foreach (Pin p in g.GetComponentsInChildren<Pin>())
+        {
+            lP.Add(new PinData(p.gameObject));
+        }
     }
 
 }
