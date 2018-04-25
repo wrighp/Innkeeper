@@ -1,8 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
-public class StatBlockForm : MonoBehaviour
+
+[Serializable]
+public class StatBlockUIData : PageData
+{
+    public string text;
+}
+
+public class StatBlockForm : PageObject
 {
 
     public Transform testLayout;
@@ -25,9 +33,10 @@ public class StatBlockForm : MonoBehaviour
     /// Call to create UI elements from StatBlockUIData
     /// Passing in data with an empty string creates based on template
     /// </summary>
-    /// <param name="uiData"></param>
-    public void CreateStatBlock(StatBlockUIData uiData)
+    /// <param name="data"></param>
+    public override void BuildPage(PageData data)
     {
+        StatBlockUIData uiData = (StatBlockUIData)data;
         /* rows holds a list object of lineData objectss
          * For each line in the statblock file passed to the parser,
          * a lineData struct is created which stores

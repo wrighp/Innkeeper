@@ -70,7 +70,7 @@ public class NetworkHandler : NetworkBehaviour
                     //Create statblockui
                     GameObject parent = GameObject.Find("Canvas/Page View/Viewport");
                     GameObject statBlock = Instantiate(prefabs[0], parent.transform);
-                    statBlock.GetComponent<StatBlockForm>().CreateStatBlock(uiData);
+                    statBlock.GetComponent<StatBlockForm>().BuildPage(uiData);
                     pages.Add(packet.name, statBlock);
                     break;
                 }
@@ -153,58 +153,8 @@ public struct PagePacket
 
 public class SyncListPagePacket : SyncListStruct<PagePacket> { }
 
-
-[Serializable]
-public abstract class PageData
-{
-    public string name;
-    //On/before/after serialize/deserialize
-    //public abstract void OnAfterDeserialize();
-    //public abstract void OnBeforeSerialize();
-}
-
 [Serializable]
 public class SharedImageData : PageData
 {
     //ImageConversion.LoadImage(Texture2D, data);
-}
-
-[Serializable]
-public class StatBlockUIData : PageData
-{
-   public string text;
-}
-
-[Serializable]
-public class MapData : PageData
-{
-    public string imagePath;
-    public PinData[] pins;
-
-    public MapData(GameObject g)
-    {
-        //Loop through transform for pins and create pindata
-        List<PinData> lP = new List<PinData>();
-        foreach (Pin p in g.GetComponentsInChildren<Pin>())
-        {
-            lP.Add(new PinData(p.gameObject));
-        }
-    }
-
-}
-
-[Serializable]
-public class PinData
-{
-    public string referencePath;
-    public Color32 color;
-    public Vector3 position;
-
-    public PinData(GameObject g)
-    {
-        //Take pin and convert to save data
-        RectTransform rect = g.GetComponent<RectTransform>();
-        position = rect.position;
-        color = (Color32)g.GetComponent<Image>().color;
-    }
 }
