@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine.UI;
+using System.Linq;
 
 public class FileManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class FileManager : MonoBehaviour
     private ScrollRect rect;
 
     //user chooses standard template to be saved as a modified template
-    void saveTemplate(string template)
+    void SaveTemplate(string template)
     {
         TextAsset[] templateAssets = Resources.LoadAll<TextAsset>("Templates");
         Dictionary<string, string> templateAssetNames = new Dictionary<string, string>();
@@ -27,7 +28,7 @@ public class FileManager : MonoBehaviour
         SerializationManager.SaveObject(path, data);
     }
 
-    void pullAssetNames()
+    void PullAssetNames()
     {
         string assetPath = SerializationManager.CreatePath("");
         DirectoryInfo d = new DirectoryInfo(assetPath);
@@ -42,10 +43,51 @@ public class FileManager : MonoBehaviour
         SerializationManager.LoadObject(assetFiles[chosenFile]);
     }
 
+    /// <summary>
+    /// Get array of save folder names in SaveData path
+    /// </summary>
+    /// <returns>string[] of Folder names</returns>
+    public string[] GetSavedCampaigns()
+    {
+        string folderPath = SerializationManager.CreatePath("");
+        DirectoryInfo d = new DirectoryInfo(folderPath);
+        
+        var stringList = d.GetDirectories().ToList().ConvertAll(x => x.Name );
+        
+        return stringList.ToArray();
+    }
+
+    /// <summary>
+    /// Get array of save folder names in SaveData path in campaign folder
+    /// </summary>
+    /// <param name="campaign">Name of folder e.g. "MyCampaign"</param>
+    /// <returns>string[] of File names in campaign folder</returns>
+    public string[] GetSavedFilesFromCampaign(string campaign)
+    {
+        string folderPath = SerializationManager.CreatePath(campaign + "/");
+        DirectoryInfo d = new DirectoryInfo(folderPath);
+
+        var stringList = d.GetFiles().ToList().ConvertAll(x => x.Name);
+
+        return stringList.ToArray();
+    }
+
+    /// <summary>
+    /// Get array of template file names in Resource folder
+    /// </summary>
+    /// <returns>string[] of template File names in template folder</returns>
+    public string[] GetTemplateNames()
+    {
+        TextAsset[] templateAssets = Resources.LoadAll<TextAsset>("Templates");
+
+        var stringList = templateAssets.ToList().ConvertAll(x => x.name);
+
+        return stringList.ToArray();
+    }
+
     // Use this for initialization
     void Start()
     {
-        
         
     }
 
