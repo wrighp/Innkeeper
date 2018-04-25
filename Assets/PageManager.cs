@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PageManager : MonoBehaviour {
 
     PinchableScrollRect scrollRect;
-    GameObject currrentPage = null;
+    public GameObject currrentPage = null;
+    GameObject pinManager;
 
     void Start(){
         scrollRect = GameObject.FindObjectOfType<PinchableScrollRect>();
+        pinManager = GameObject.Find("PinManager");
     }
 
     void Update() {
@@ -26,6 +29,12 @@ public class PageManager : MonoBehaviour {
             scrollRect.enabled = true;
             scrollRect.content = currrentPage.GetComponent<RectTransform>();
         }
+    }
+
+    public void SwitchPage()
+    {
+        pinManager.SetActive(currrentPage.GetComponent<Image>() != null);
+        
     }
 
 }

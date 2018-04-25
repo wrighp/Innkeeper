@@ -9,8 +9,15 @@ public class PinManager : MonoBehaviour {
     public GameObject pinPrefab;
     public GameObject dragIcon;
 
+    PageManager pM;
     GameObject drawnImage;
     bool heldDown = false;
+
+
+    public void Start()
+    {
+        pM = GameObject.FindObjectOfType<PageManager>();
+    }
 
     public void Update()
     {
