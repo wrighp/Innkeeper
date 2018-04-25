@@ -38,7 +38,7 @@ public class FileManager : MonoBehaviour
         }
 
         //Here, the user selects the name of the file they want displayed on the page
-        string chosenFile;
+        string chosenFile = GameObject.Find("StatBlockInputField").GetComponent<Text>().text;
         SerializationManager.LoadObject(assetFiles[chosenFile]);
     }
 
