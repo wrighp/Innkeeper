@@ -7,10 +7,7 @@ using System.Linq;
 
 public class FileManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject container;
-    [SerializeField]
-    private ScrollRect rect;
+    public GameObject campaignPrefab;
 
     //user chooses standard template to be saved as a modified template
     void SaveTemplate(string template)
@@ -85,15 +82,16 @@ public class FileManager : MonoBehaviour
         return stringList.ToArray();
     }
 
-    // Use this for initialization
+    //Create a blank new savedata
+    public void CreateCampaign() {
+        GameObject nc = Instantiate(campaignPrefab, transform);
+        nc.transform.SetAsFirstSibling();
+        nc.GetComponent<Campaign>().campaignName = "NewCampaign";
+    }
+
+    // Should create a save data for each folder in savedata
     void Start()
     {
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
