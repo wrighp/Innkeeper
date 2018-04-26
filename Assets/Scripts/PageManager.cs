@@ -25,6 +25,7 @@ public class PageManager : MonoBehaviour {
     void Start(){
         scrollRect = GameObject.FindObjectOfType<PinchableScrollRect>();
         pinManager = GameObject.Find("PinManager");
+        pinManager.SetActive(false);
         viewport = GetComponentInChildren<Mask>().gameObject;
     }
 

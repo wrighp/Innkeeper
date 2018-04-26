@@ -335,6 +335,10 @@ Prefab:
       propertyPath: dragIcon
       value: 
       objectReference: {fileID: 1999394553}
+    - target: {fileID: 1262110288028660, guid: d4a188f56525f504cae7f9e2bd5acd77, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d4a188f56525f504cae7f9e2bd5acd77, type: 2}
   m_IsPrefabParent: 0
@@ -584,6 +588,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114423745757965026, guid: dfe50fdd2035583438aeaba436111bb5, type: 2}
+    - {fileID: 114394827479128948, guid: dfe50fdd2035583438aeaba436111bb5, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: dfe50fdd2035583438aeaba436111bb5, type: 2}
   m_IsPrefabParent: 0
 --- !u!224 &165425753 stripped
@@ -778,6 +783,21 @@ GameObject:
   m_PrefabParentObject: {fileID: 1164335072577132, guid: dfe50fdd2035583438aeaba436111bb5,
     type: 2}
   m_PrefabInternal: {fileID: 165425752}
+--- !u!114 &843689692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843689691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97d7ebb074ff2b4e9030f6b48176de0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 1355429911529602, guid: 383daa1cc1dafd64a8e4e4363c87408b, type: 2}
+  - {fileID: 1846547320100512, guid: 7f66e41d1c2d60b429c0da670d3caaa3, type: 2}
+  currrentPage: {fileID: 0}
 --- !u!114 &843689693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1525,7 +1545,8 @@ Prefab:
       value: 
       objectReference: {fileID: 1846547320100512, guid: 7f66e41d1c2d60b429c0da670d3caaa3,
         type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114394827479128948, guid: dfe50fdd2035583438aeaba436111bb5, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: dfe50fdd2035583438aeaba436111bb5, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2058551180
