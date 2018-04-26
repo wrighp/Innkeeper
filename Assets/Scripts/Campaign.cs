@@ -3,15 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System.Linq;
 
 public class Campaign : MonoBehaviour {
 
+    public GameObject fileHolder;
+    public GameObject campaignFilePrefab;
+
     string campaignName;
+
 
 	// Use this for initialization
 	void Start () {
 		
 	}
+
+    void Update() {
+        
+    }
+
+    public void DeleteFileTabs() {
+        for (int i = 0; i < fileHolder.transform.childCount-1; ++i) {
+            Destroy(fileHolder.transform.GetChild(i));
+        }
+        GetComponent<LayoutElement>().preferredHeight = 200;
+        fileHolder.GetComponent<LayoutElement>().preferredHeight = 200;
+    }
+
+    public void LoadFiles() {
+        int count = 1;
+        DeleteFileTabs();
+        foreach (string s in FileManager.instance.GetSavedFilesFromCampaign(campaignName)) {
+            GameObject gO = Instantiate(campaignFilePrefab, fileHolder.transform);
+            gO.GetComponent<CampaignFile>().SetFileName(s);
+            count++;
+        }
+        GetComponent<LayoutElement>().preferredHeight = 200 + count * 200;
+        fileHolder.GetComponent<LayoutElement>().preferredHeight = + count * 200;
+    }
+
+    public void ChangeVisibiliyOfContents() {
+        print("Hello");
+        if (!fileHolder.activeInHierarchy) {
+            fileHolder.SetActive(true);
+            LoadFiles();
+        } else {
+            DeleteFileTabs();
+            fileHolder.SetActive(false);
+        }
+    }
 	
     //Set name of folder on instantiation
     public void SetCampaignName(string name)
