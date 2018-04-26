@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class CampaignFile : MonoBehaviour {
 
     string fileName;
+    string extension;
     Campaign campaign;
 
     public void SetCampaignName(Campaign c) {
@@ -16,8 +17,9 @@ public class CampaignFile : MonoBehaviour {
 
     //Set name of folder on instantiation
     public void SetFileName(string cname) {
-        fileName = cname;
-        GetComponentInChildren<InputField>().text = cname;
+        fileName = cname.Split('.')[0];
+        extension = cname.Split('.')[1];
+        GetComponentInChildren<InputField>().text = fileName;
     }
 
     public string GetFileName() {
@@ -28,8 +30,8 @@ public class CampaignFile : MonoBehaviour {
     //Change the name pf the folder if and when the user changes the name
     public void ChangeFileName() {
         string cname = GetComponentInChildren<InputField>().text;
-        var oldPath = SerializationManager.CreatePath(campaign.GetCampaignName() + "/" + fileName);
-        var newPath = SerializationManager.CreatePath(campaign.GetCampaignName() + "/" + cname);
+        var oldPath = SerializationManager.CreatePath(campaign.GetCampaignName() + "/" + fileName + "." + extension);
+        var newPath = SerializationManager.CreatePath(campaign.GetCampaignName() + "/" + cname + "." + extension);
         if (oldPath.Equals(newPath) || Directory.Exists(newPath)) {
             campaign.LoadFiles();
             return;
@@ -47,7 +49,7 @@ public class CampaignFile : MonoBehaviour {
 
     //Delete file
     public void DeleteFile() {
-        SerializationManager.DeleteFile(SerializationManager.CreatePath(campaign.GetCampaignName() + "/" + fileName));
+        SerializationManager.DeleteFile(SerializationManager.CreatePath(campaign.GetCampaignName() + "/" + fileName + "." + extension));
         campaign.LoadFiles();
     }
 

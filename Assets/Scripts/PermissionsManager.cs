@@ -29,7 +29,7 @@ public class PermissionsManager : MonoBehaviour {
                 }
                 SharedImageData sid = new SharedImageData();
                 sid.bytes = tex.EncodeToPNG();
-                string finalPath = SerializationManager.CreatePath(campaignName + "/NewMap");
+                string finalPath = SerializationManager.CreatePath(campaignName + "/NewMap.map");
                 SerializationManager.SaveObject(finalPath, sid);
             }
         }, "Select a PNG image", "image/png");

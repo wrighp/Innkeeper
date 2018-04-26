@@ -27,7 +27,7 @@ public class FileManager : MonoBehaviour
             templateAssetNames.Add(templateAssets[i].name, templateAssets[i].text);
         }
 
-        string path = SerializationManager.CreatePath( campaignName + "/" +template + "-mod.txt");
+        string path = SerializationManager.CreatePath( campaignName + "/" +template + "-mod.sbd");
         StatBlockUIData data = new StatBlockUIData();
         data.text = templateAssetNames[template];
         SerializationManager.SaveObject(path, data);
