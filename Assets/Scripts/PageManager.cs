@@ -9,6 +9,8 @@ public class PageManager : MonoBehaviour {
 
     public GameObject[] prefabs;
 
+    public GameObject CampaignView;
+
     public GameObject currrentPage = null;
 
     PinchableScrollRect scrollRect;
@@ -79,10 +81,12 @@ public class PageManager : MonoBehaviour {
 
         scrollRect.enabled = true;
         scrollRect.content = currrentPage.GetComponent<RectTransform>();
-        
 
-       
-
+        SetActiveCampaignView(false);
     }
 
+    public void SetActiveCampaignView(bool setActive)
+    {
+        CampaignView.SetActive(setActive);
+    }
 }
