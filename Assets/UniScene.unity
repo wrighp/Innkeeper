@@ -337,7 +337,7 @@ Prefab:
       objectReference: {fileID: 1999394553}
     - target: {fileID: 1262110288028660, guid: d4a188f56525f504cae7f9e2bd5acd77, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d4a188f56525f504cae7f9e2bd5acd77, type: 2}
@@ -798,6 +798,7 @@ MonoBehaviour:
   - {fileID: 1355429911529602, guid: 383daa1cc1dafd64a8e4e4363c87408b, type: 2}
   - {fileID: 1846547320100512, guid: 7f66e41d1c2d60b429c0da670d3caaa3, type: 2}
   currrentPage: {fileID: 0}
+  viewport: {fileID: 1656872173}
 --- !u!114 &843689693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,7 +1126,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0.00004195533}
+  m_AnchoredPosition: {x: 0.000061035156, y: -0.000033987653}
   m_SizeDelta: {x: -0.000061035, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1425413354
@@ -1187,6 +1188,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!1 &1656872173 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1576828589229904, guid: dfe50fdd2035583438aeaba436111bb5,
+    type: 2}
+  m_PrefabInternal: {fileID: 2048332705}
 --- !u!1 &1872657088
 GameObject:
   m_ObjectHideFlags: 0

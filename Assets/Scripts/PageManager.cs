@@ -13,7 +13,7 @@ public class PageManager : MonoBehaviour {
 
     PinchableScrollRect scrollRect;
     GameObject pinManager;
-    GameObject viewport;
+    public GameObject viewport;
 
     string openPage;
 
@@ -26,7 +26,6 @@ public class PageManager : MonoBehaviour {
         scrollRect = GameObject.FindObjectOfType<PinchableScrollRect>();
         pinManager = GameObject.Find("PinManager");
         pinManager.SetActive(false);
-        viewport = GetComponentInChildren<Mask>().gameObject;
     }
 
     void Update() {
@@ -37,20 +36,24 @@ public class PageManager : MonoBehaviour {
 
     public void DeletePage()
     {
-        if(viewport.transform.childCount == 0)
+        scrollRect.enabled = false;
+        scrollRect.content = null;
+        if (viewport.transform.childCount == 0)
         {
             return;
         }
         //Get Viewport
-        GameObject.Destroy(viewport.transform.GetChild(0));
+        GameObject.Destroy(viewport.transform.GetChild(0).gameObject);
     }
 
     public void SwitchPage(CampaignFile file)
     {
+      
         DeletePage();
         Debug.Log("Switching to page: " + file.GetFileName());
 
-        string fullPath = file.GetCampaign().GetCampaignName() + "/" + file.GetFileName() + file.GetExtension();
+        string fullPath = file.GetCampaign().GetCampaignName() + "/" + file.GetFileName() +"." + file.GetExtension();
+        fullPath = SerializationManager.CreatePath(fullPath);
 
         switch (file.GetExtension())
         {
@@ -66,10 +69,10 @@ public class PageManager : MonoBehaviour {
             case "map":
                 pinManager.SetActive(true);
                 break;
-            default:
-                Debug.Log(file.GetExtension() + " is not a proper extension!");
-                return;
-                break;
+            default: 
+                Debug.Log(file.GetExtension() + " is not a proper extension!"); 
+                return; 
+                break; 
         }
 
         
