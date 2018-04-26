@@ -143,5 +143,10 @@ public class FileManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        string savePath = SerializationManager.CreatePath("");
+        if (!Directory.Exists(savePath))
+        {
+            SerializationManager.CreateFolder(savePath);
+        }
     }
 }
