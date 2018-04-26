@@ -36,6 +36,7 @@ public class CampaignFile : MonoBehaviour {
     }
     public void LoadFile()
     {
+        Debug.Log("Load file button");
         PageManager.instance.SwitchPage(this);
     }
 

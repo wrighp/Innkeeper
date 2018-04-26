@@ -47,18 +47,20 @@ public class PageManager : MonoBehaviour {
     public void SwitchPage(CampaignFile file)
     {
         DeletePage();
-        string fullPath;
+        Debug.Log("Switching to page: " + file.GetFileName());
+
+        string fullPath = file.GetCampaign().GetCampaignName() + "/" + file.GetFileName() + file.GetExtension();
 
         switch (file.GetExtension())
         {
             case "sbd":
-                /*
+                
                 pinManager.SetActive(false);
                 currrentPage = Instantiate(prefabs[0], viewport.transform);
                 StatBlockUIData uiData = (StatBlockUIData)SerializationManager.LoadObject(fullPath);
 
                 currrentPage.GetComponent<StatBlockForm>().BuildPage(uiData);
-                */
+                
                 break;
             case "map":
                 pinManager.SetActive(true);
