@@ -14,7 +14,7 @@ public class StatBlockForm : PageObject
 {
 
     public Transform testLayout;
-
+    public string fullPath;
     public string pageName;
     public TextAsset textAsset;
     public string savePath;
@@ -70,9 +70,6 @@ public class StatBlockForm : PageObject
         {
             sourceText = uiData.text;
         }
-        print(uiData.name);
-        pageName = uiData.name;
-        gameObject.name = pageName;
 
         List<LineData> rows = StatBlockParser.StringToLineData(sourceText, stringWeight, numWeight, checkWeight);
 
@@ -109,20 +106,20 @@ public class StatBlockForm : PageObject
                     case WordType.StringInput:
                         obj = (GameObject)GameObject.Instantiate(stringInputUI, lineSpacer);
                         obj.GetComponent<InputField>().text = text;
-                        obj.GetComponent<InputField>().onEndEdit.AddListener(delegate { PrepareStatPacket(); });
+                        obj.GetComponent<InputField>().onEndEdit.AddListener(delegate { SaveStatblock(); });
                         break;
                     case WordType.NumInput:
                         obj = (GameObject)GameObject.Instantiate(numInputUI, lineSpacer);
                         obj.GetComponent<InputField>().text = text;
-                        obj.GetComponent<InputField>().onEndEdit.AddListener(delegate { PrepareStatPacket(); });
+                        obj.GetComponent<InputField>().onEndEdit.AddListener(delegate { SaveStatblock(); });
                         break;
                     case WordType.Checked:
                         obj = (GameObject)GameObject.Instantiate(checkboxUIOn, lineSpacer);
-                        obj.GetComponent<Toggle>().onValueChanged.AddListener(delegate { PrepareStatPacket(); });
+                        obj.GetComponent<Toggle>().onValueChanged.AddListener(delegate { SaveStatblock(); });
                         break;
                     case WordType.Unchecked:
                         obj = (GameObject)GameObject.Instantiate(checkboxUI, lineSpacer);
-                        obj.GetComponent<Toggle>().onValueChanged.AddListener(delegate { PrepareStatPacket(); });
+                        obj.GetComponent<Toggle>().onValueChanged.AddListener(delegate { SaveStatblock(); });
                         break;
                     case WordType.String:
                         obj = (GameObject)GameObject.Instantiate(textUI, lineSpacer);
@@ -160,8 +157,9 @@ public class StatBlockForm : PageObject
     public void SaveStatblock()
     {
         StatBlockUIData sbd = CreateStatBlockUIData();
-        string path = SerializationManager.CreatePath(campaign + "/" + pageName);
-        SerializationManager.SaveObject(path, sbd);
+       
+        print(fullPath);
+        SerializationManager.SaveObject(fullPath, sbd);
 
     }
 
@@ -172,7 +170,6 @@ public class StatBlockForm : PageObject
     public StatBlockUIData CreateStatBlockUIData()
     {
         StatBlockUIData uiData = new StatBlockUIData();
-        uiData.name = pageName;
         List<LineData> rows = new List<LineData>();
         //Loop through UI elements and convert to list of linedata
         

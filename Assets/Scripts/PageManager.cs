@@ -66,7 +66,8 @@ public class PageManager : MonoBehaviour {
                 StatBlockUIData uiData = (StatBlockUIData)SerializationManager.LoadObject(fullPath);
 
                 currrentPage.GetComponent<StatBlockForm>().BuildPage(uiData);
-                
+                currrentPage.GetComponent<StatBlockForm>().fullPath = fullPath;
+                currrentPage.GetComponent<StatBlockForm>().campaign = file.GetCampaign().GetCampaignName();
                 break;
             case "map":
                 pinManager.SetActive(true);
