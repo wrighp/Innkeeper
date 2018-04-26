@@ -30,8 +30,10 @@ public class Campaign : MonoBehaviour {
 	public void ChangeCampaignName(string name) {
         var oldPath = SerializationManager.CreatePath(campaignName);
         var newPath = SerializationManager.CreatePath(name);
-        if (oldPath.Equals(newPath))
+        if (oldPath.Equals(newPath) || Directory.Exists(newPath))
         {
+            //Rebuild in order to reset text back to original name
+            FileManager.instance.ReloadCampaignTabs();
             return;
         }
 
@@ -46,8 +48,6 @@ public class Campaign : MonoBehaviour {
         catch(IOException ex)
         {
             Debug.LogException(ex);
-            //Reset name to old name
-            GetComponentInChildren<InputField>().text = name;
         }
     }
 
