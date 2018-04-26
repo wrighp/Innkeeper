@@ -9,6 +9,8 @@ TagManager:
   - Text
   - ToggleOn
   - ToggleOff
+  - Map
+  - StatBlock
   layers:
   - Default
   - TransparentFX
