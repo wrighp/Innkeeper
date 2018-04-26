@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class FileManager : MonoBehaviour
 {
     public GameObject campaignPrefab;
+
+    public static FileManager instance;
+
 
     //user chooses standard template to be saved as a modified template
     void SaveTemplate(string template)
@@ -48,9 +52,9 @@ public class FileManager : MonoBehaviour
     {
         string folderPath = SerializationManager.CreatePath("");
         DirectoryInfo d = new DirectoryInfo(folderPath);
-        
-        var stringList = d.GetDirectories().ToList().ConvertAll(x => x.Name );
-        
+        //Sort directory by date created and then convert to a list of strings
+        var stringList = d.GetDirectories().ToList().OrderByDescending( x => x.CreationTime).Select(x => x.Name).ToList();
+
         return stringList.ToArray();
     }
 
@@ -63,8 +67,8 @@ public class FileManager : MonoBehaviour
     {
         string folderPath = SerializationManager.CreatePath(campaign + "/");
         DirectoryInfo d = new DirectoryInfo(folderPath);
-
-        var stringList = d.GetFiles().ToList().ConvertAll(x => x.Name);
+        //Sort files by date created and then convert to a list of strings
+        var stringList = d.GetFiles().ToList().OrderByDescending(x => x.CreationTime).Select(x => x.Name).ToList();
 
         return stringList.ToArray();
     }
@@ -84,14 +88,60 @@ public class FileManager : MonoBehaviour
 
     //Create a blank new savedata
     public void CreateCampaign() {
-        GameObject nc = Instantiate(campaignPrefab, transform);
-        nc.transform.SetAsFirstSibling();
-        nc.GetComponent<Campaign>().campaignName = "NewCampaign";
+
+        const string newName = "NewCampaign";
+       
+        //Create hashset of campaign names to check against in order to make incremental campaign names
+        HashSet<string> names = new HashSet<string>(GetSavedCampaigns());
+
+        int count = 0;
+        //Increment number as long as folder of that name and number already exist
+        while (names.Contains(newName + (count > 0 ? count.ToString() : "")))
+        {
+            count++;
+        }
+
+        string folderPath = SerializationManager.CreatePath(newName + (count > 0 ? count.ToString(): ""));
+
+        if (SerializationManager.CreateFolder(folderPath))
+        {
+            //Reload Campaigns
+            ReloadCampaignTabs();
+        } 
     }
+
+    public void DeleteCampaignTabs()
+    {
+        Campaign[] tabs = GetComponentsInChildren<Campaign>();
+        for (int i = 0; i < tabs.Count(); i++)
+        {
+            Destroy(tabs[i].gameObject);
+        }
+    
+    }
+
+    public void ReloadCampaignTabs()
+    {
+        DeleteCampaignTabs();
+
+        foreach (string name in GetSavedCampaigns())
+        {
+            GameObject nc = Instantiate(campaignPrefab, transform);
+            nc.transform.SetAsFirstSibling();
+            nc.GetComponent<Campaign>().SetCampaignName(name);
+        }
+
+    }
+
 
     // Should create a save data for each folder in savedata
     void Start()
     {
-        
+        ReloadCampaignTabs();
+    }
+
+    void Awake()
+    {
+        instance = this;
     }
 }

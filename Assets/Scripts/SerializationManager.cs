@@ -39,8 +39,9 @@ public static class SerializationManager
         {
             formatter.Serialize(stream, graph);
         }
-        catch (IOException)
+        catch (IOException ex)
         {
+            Debug.LogException(ex);
             return false;
         }
         return true;
@@ -59,8 +60,9 @@ public static class SerializationManager
             }
 
         }
-        catch (IOException)
+        catch (IOException ex)
         {
+            Debug.LogException(ex);
             return false;
         }
         using (FileStream stream = new FileStream(path, FileMode.Create))
@@ -71,8 +73,9 @@ public static class SerializationManager
             {
                 formatter.Serialize(stream, graph);
             }
-            catch (IOException)
+            catch (IOException ex)
             {
+                Debug.LogException(ex);
                 return false;
             }
         }
@@ -92,8 +95,9 @@ public static class SerializationManager
             {
                 return formatter.Deserialize(stream);
             }
-            catch (IOException)
+            catch (IOException ex)
             {
+                Debug.LogException(ex);
                 return null;
             }
         }
@@ -118,23 +122,76 @@ public static class SerializationManager
                 Debug.LogFormat("Loading file: {0}", path);
                 return formatter.Deserialize(stream);
             }
-            catch (IOException)
+            catch (IOException ex)
             {
+                Debug.LogException(ex);
                 return null;
             }
         }
     }
-    public static void DeleteFile(string path)
+    public static bool CreateFolder(string folderPath)
+    {
+        if (Directory.Exists(folderPath))
+        {
+            Debug.LogFormat("Folder already exists: {0}", folderPath);
+            return false;
+        }
+            try
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+        catch (IOException ex)
+        {
+            Debug.LogException(ex);
+            return false;
+        }
+        Debug.LogFormat("Created folder at: {0}", folderPath);
+        return true;
+    }
+
+    public static bool DeleteFile(string path)
     {
         if (File.Exists(path))
         {
-            Debug.LogFormat("Deleting file: {0}", path);
-            File.Delete(path);
+            try
+            {
+                Debug.LogFormat("Deleting file: {0}", path);
+                File.Delete(path);
+            }
+            catch (IOException ex)
+            {
+                Debug.LogException(ex);
+                return false;
+            }
         }
         else
         {
             Debug.LogFormat("Could not delete file: {0}\nFile does not exist!", path);
+            return false;
         }
-        
+        return true;
+    }
+
+    public static bool DeleteFolder(string path, bool recursive)
+    {
+        if (Directory.Exists(path))
+        {
+            try
+            {
+                Debug.LogFormat("Deleting folder: {0}", path);
+                Directory.Delete(path, recursive);
+            }
+            catch (IOException ex)
+            {
+                Debug.LogException(ex);
+                return false;
+            }
+        }
+        else
+        {
+            Debug.LogFormat("Could not delete folder: {0}\nFolder does not exist!", path);
+            return false;
+        }
+        return true;
     }
 }
