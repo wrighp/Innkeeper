@@ -157,6 +157,14 @@ public class StatBlockForm : PageObject
         }
     }
 
+    public void SaveStatblock()
+    {
+        StatBlockUIData sbd = CreateStatBlockUIData();
+        string path = SerializationManager.CreatePath(campaign + "/" + pageName);
+        SerializationManager.SaveObject(path, sbd);
+
+    }
+
     /// <summary>
     /// Call to get stat block data from ui elements
     /// </summary>

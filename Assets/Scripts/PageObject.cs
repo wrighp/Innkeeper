@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public abstract class PageObject : MonoBehaviour
 {
+    public string campaign;
     public abstract void BuildPage(PageData data);
 }
 

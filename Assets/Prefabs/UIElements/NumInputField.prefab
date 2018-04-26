@@ -181,7 +181,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114465306162832674, guid: 383daa1cc1dafd64a8e4e4363c87408b,
           type: 2}
-        m_MethodName: PrepareStatPacket
+        m_MethodName: SaveStatblock
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
