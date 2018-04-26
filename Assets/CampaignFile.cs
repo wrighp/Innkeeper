@@ -25,7 +25,19 @@ public class CampaignFile : MonoBehaviour {
     public string GetFileName() {
         return fileName;
     }
+    public string GetExtension()
+    {
+        return extension;
+    }
 
+    public Campaign GetCampaign()
+    {
+        return campaign;
+    }
+    public void LoadFile()
+    {
+        PageManager.instance.SwitchPage(this);
+    }
 
     //Change the name pf the folder if and when the user changes the name
     public void ChangeFileName() {
