@@ -66,6 +66,10 @@ public class PageManager : MonoBehaviour {
             case "map":
                 pinManager.SetActive(true);
                 break;
+            default:
+                Debug.Log(file.GetExtension() + " is not a proper extension!");
+                return;
+                break;
         }
 
         
