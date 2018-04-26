@@ -16,7 +16,7 @@ public class CampaignFile : MonoBehaviour {
 
     //Set name of folder on instantiation
     public void SetFileName(string cname) {
-        fileName = name;
+        fileName = cname;
         GetComponentInChildren<InputField>().text = cname;
     }
 
@@ -26,11 +26,12 @@ public class CampaignFile : MonoBehaviour {
 
 
     //Change the name pf the folder if and when the user changes the name
-    public void ChangeFileName(string cname) {
+    public void ChangeFileName() {
+        string cname = GetComponentInChildren<InputField>().text;
         var oldPath = SerializationManager.CreatePath(campaign.GetCampaignName() + "/" + fileName);
         var newPath = SerializationManager.CreatePath(campaign.GetCampaignName() + "/" + cname);
         if (oldPath.Equals(newPath) || Directory.Exists(newPath)) {
-            //campaign.ReloadFiles(transform.parent.gameObject);
+            campaign.LoadFiles();
             return;
         }
 
@@ -38,7 +39,7 @@ public class CampaignFile : MonoBehaviour {
         try {
             Directory.Move(oldPath, newPath);
             fileName = cname;
-            //campaign.ReloadFiles(transform.parent.gameObject);
+            campaign.LoadFiles();
         } catch (IOException ex) {
             Debug.LogException(ex);
         }
@@ -47,7 +48,7 @@ public class CampaignFile : MonoBehaviour {
     //Delete file
     public void DeleteFile() {
         SerializationManager.DeleteFile(SerializationManager.CreatePath(campaign.GetCampaignName() + "/" + fileName));
-        //campaign.ReloadFiles(transform.parent.gameObject);
+        campaign.LoadFiles();
     }
 
 
