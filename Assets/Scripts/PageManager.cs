@@ -31,8 +31,14 @@ public class PageManager : MonoBehaviour {
     }
 
     void Update() {
-
-            
+        if(currrentPage != null)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                DeletePage();
+                SetActiveCampaignView(true);
+            }
+        }    
         
     }
 
