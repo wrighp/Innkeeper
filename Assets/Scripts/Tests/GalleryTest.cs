@@ -4,10 +4,26 @@ using UnityEngine;
 
 public class GalleryTest : MonoBehaviour {
 
+    private void Start()
+    {
+        
+        
+    }
+
+    void CheckPermissions()
+    {
+        if (NativeGallery.CheckPermission() == NativeGallery.Permission.ShouldAsk)
+        {
+            NativeGallery.RequestPermission();
+        }
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            CheckPermissions();
+
             if (Input.mousePosition.x < Screen.width / 3)
             {
                 // Take a screenshot and save it to Gallery/Photos
