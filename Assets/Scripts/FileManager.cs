@@ -13,8 +13,12 @@ public class FileManager : MonoBehaviour
     public static FileManager instance;
 
 
+    public void GetImage(string campaignName) {
+        GetComponent<PermissionsManager>().GetGalleryImage(campaignName);
+    }
+
     //user chooses standard template to be saved as a modified template
-    void SaveTemplate(string template)
+    public void SaveTemplate(string template, string campaignName)
     {
         TextAsset[] templateAssets = Resources.LoadAll<TextAsset>("Templates");
         Dictionary<string, string> templateAssetNames = new Dictionary<string, string>();
@@ -23,7 +27,7 @@ public class FileManager : MonoBehaviour
             templateAssetNames.Add(templateAssets[i].name, templateAssets[i].text);
         }
 
-        string path = SerializationManager.CreatePath(template + "-mod.txt");
+        string path = SerializationManager.CreatePath( campaignName + "/" +template + "-mod.txt");
         StatBlockUIData data = new StatBlockUIData();
         data.text = templateAssetNames[template];
         SerializationManager.SaveObject(path, data);

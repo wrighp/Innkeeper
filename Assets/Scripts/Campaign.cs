@@ -93,6 +93,21 @@ public class Campaign : MonoBehaviour {
         }
     }
 
+    public void AddDnDTemplate() {
+        FileManager.instance.SaveTemplate("5e Template", campaignName);
+        LoadFiles();
+    }
+
+    public void AddPathFinderTemplate() {
+        FileManager.instance.SaveTemplate("Pathfinder Template", campaignName);
+        LoadFiles();
+    }
+
+    public void AddImage() {
+        FileManager.instance.GetImage(campaignName);
+        LoadFiles();
+    }
+
     //Delete campaign
     public void DeleteCampaign() {
         SerializationManager.DeleteFolder(SerializationManager.CreatePath(campaignName),true);
