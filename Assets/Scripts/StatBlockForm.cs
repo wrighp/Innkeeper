@@ -33,7 +33,7 @@ public class StatBlockForm : PageObject
     /// Call to create UI elements from StatBlockUIData
     /// Passing in data with an empty string creates based on template
     /// </summary>
-    /// <param name="data"></param>
+    /// <param name="data">All the data needed to specify the page type</param>
     public override void BuildPage(PageData data)
     {
         StatBlockUIData uiData = (StatBlockUIData)data;
@@ -75,6 +75,7 @@ public class StatBlockForm : PageObject
 
         Transform layoutGroup = testLayout;
         GameObject.Instantiate(lineSegmentUI, layoutGroup);
+        //Iterate through every row of lie data, creating the specified prefab, filling its contents with the user defined data
         for (int i = 0, rowsCount = rows.Count; i < rowsCount; i++)
         {
             LineData row = rows[i];
@@ -131,11 +132,11 @@ public class StatBlockForm : PageObject
             }
 
         }
-
-        //Debug.Log(StatBlockParser.LineDataToString(rows, stringWeight, numWeight, checkWeight));
-        
     }
 
+    /// <summary>
+    /// Net code to create a page packet for the current page form
+    /// </summary>
     public void PrepareStatPacket() {
         if (pageName == "") return;
         print("Prepare stat packet");
@@ -146,6 +147,7 @@ public class StatBlockForm : PageObject
         packet.data = SerializationManager.SerializeObject(this.CreateStatBlockUIData());
         packet.destroy = false;
         
+        //Get the local player and have the object send the data
         foreach (ClientController cc in GameObject.FindObjectsOfType<ClientController>()) {
             if (cc.isLocalPlayer) {
                 cc.CmdSendPagePacket(packet);
@@ -154,68 +156,84 @@ public class StatBlockForm : PageObject
         }
     }
 
+    /// <summary>
+    /// Event Listener, Serialize and save the current statblock to the system
+    /// </summary>
     public void SaveStatblock()
     {
         StatBlockUIData sbd = CreateStatBlockUIData();
-       
-        print(fullPath);
         SerializationManager.SaveObject(fullPath, sbd);
-
     }
 
     /// <summary>
     /// Call to get stat block data from ui elements
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Return a statblockuidata that can be converted to string</returns>
     public StatBlockUIData CreateStatBlockUIData()
     {
         StatBlockUIData uiData = new StatBlockUIData();
         List<LineData> rows = new List<LineData>();
         //Loop through UI elements and convert to list of linedata
         
+        //Iterate trhouh each row of elements
         for (int i = 0; i < transform.childCount; ++i)
         {
             LineData lD = new LineData();
             List<string> words = new List<string>();
             Transform t = testLayout.GetChild(i);
 
+            //Iterate through each element addings its information to the statblockuidata
             for (int j = 0; j < t.childCount; ++j)
             {
                 Transform child = t.GetChild(j);
-                switch (child.tag) {
+                switch (child.tag)
+                {
                     case "Input":
-                        lD.forms.Add(WordType.StringInput);
-                        words.Add(child.GetComponent<InputField>().text);
-                        lD.totalWeight += stringWeight;
-                        lD.weights.Add(stringWeight);
-                        break;
+                        {
+
+                            lD.forms.Add(WordType.StringInput);
+                            words.Add(child.GetComponent<InputField>().text);
+                            lD.totalWeight += stringWeight;
+                            lD.weights.Add(stringWeight);
+                            break;
+                        }
                     case "NumInput":
-                        lD.forms.Add(WordType.NumInput);
-                        words.Add(child.GetComponent<InputField>().text);
-                        lD.totalWeight += numWeight;
-                        lD.weights.Add(numWeight);
-                        break;
+                        {
+                            lD.forms.Add(WordType.NumInput);
+                            words.Add(child.GetComponent<InputField>().text);
+                            lD.totalWeight += numWeight;
+                            lD.weights.Add(numWeight);
+                            break;
+                        }
                     case "Text":
-                        lD.forms.Add(WordType.String);
-                        words.Add(child.GetComponent<Text>().text);
-                        lD.totalWeight += stringWeight;
-                        lD.weights.Add(stringWeight);
-                        break;
+                        {
+                            lD.forms.Add(WordType.String);
+                            words.Add(child.GetComponent<Text>().text);
+                            lD.totalWeight += stringWeight;
+                            lD.weights.Add(stringWeight);
+                            break;
+                        }
                     case "ToggleOn":
-                        lD.forms.Add(WordType.Checked);
-                        words.Add("on");
-                        lD.totalWeight += checkWeight;
-                        lD.weights.Add(checkWeight);
-                        break;
+                        {
+                            lD.forms.Add(WordType.Checked);
+                            words.Add("on");
+                            lD.totalWeight += checkWeight;
+                            lD.weights.Add(checkWeight);
+                            break;
+                        }
                     case "ToggleOff":
-                        lD.forms.Add(WordType.Unchecked);
-                        words.Add("off");
-                        lD.totalWeight += checkWeight;
-                        lD.weights.Add(checkWeight);
-                        break;
+                        {
+                            lD.forms.Add(WordType.Unchecked);
+                            words.Add("off");
+                            lD.totalWeight += checkWeight;
+                            lD.weights.Add(checkWeight);
+                            break;
+                        }
                     default:
-                        Debug.LogError("Invalid type passed to CreateStatBlockUiData");
-                        break;
+                        {
+                            Debug.LogError("Invalid type passed to CreateStatBlockUiData");
+                            break;
+                        }
                 }
 
             }
@@ -232,8 +250,6 @@ public class StatBlockForm : PageObject
             lD.checkWeight = checkWeight;
             rows.Add(lD);
         }
-        //WriteString(rows, "my.txt");
-
         uiData.text = StatBlockParser.LineDataToString(rows, stringWeight, numWeight, checkWeight);
         return uiData;
     }

@@ -37,6 +37,13 @@ public class LineData
         forms = new List<WordType>();
     }
 
+    /// <summary>
+    /// Parse a line data in order to create stat block ui data
+    /// </summary>
+    /// <param name="input">Text to be parsed</param>
+    /// <param name="sw">Weight for strings</param>
+    /// <param name="nw">Weight for numbers</param>
+    /// <param name="cw">Weight for checkboxes</param>
     public LineData(string input, int sw, int nw, int cw)
     {
         stringWeight = sw;
@@ -154,20 +161,21 @@ public class LineData
                 weights.Add(numWeight);
             }
             totalWeight += weights[i];
-            if (totalWeight > 0)
-            {
-                //Debug.Log(words[i] + weights[i] + forms[i]);
-            }
         }
-         
-        //Debug.Log("totalweight: " + totalWeight);
-        //Debug.Log("" + words.Length + weights.Count + forms.Count);
     }
 
 };
 
 public static class StatBlockParser
 {
+    /// <summary>
+    /// Convert a string into line data objects
+    /// </summary>
+    /// <param name="text">Text to be converted</param>
+    /// <param name="sw">Weight of strings</param>
+    /// <param name="nw">Weight of numbers</param>
+    /// <param name="cw">Weight of checkboxes</param>
+    /// <returns></returns>
     public static List<LineData> StringToLineData(string text, int sw, int nw, int cw)
     {
         List<LineData> rows = new List<LineData>();
@@ -182,6 +190,14 @@ public static class StatBlockParser
         return rows;
     }
 
+    /// <summary>
+    /// Convert line data to string
+    /// </summary>
+    /// <param name="rows">List of all rows in the page</param>
+    /// <param name="sw">Weight of strings</param>
+    /// <param name="numWeight">Weight of numbers</param>
+    /// <param name="cw">Weight of checks</param>
+    /// <returns>String conversion of line data</returns>
     public static string LineDataToString(List<LineData> rows, int sw, int numWeight, int cw)
     {
         StringBuilder sb = new StringBuilder();
@@ -197,11 +213,6 @@ public static class StatBlockParser
             {
                 sb.Append("}\n");
             }
-            //else if (row.totalWeight == 0)
-            //{
-            //    Debug.Log("Sorry nothing");
-            //    continue;
-            //}
             else if (row.totalWeight == -1)
             {
                 sb.Append("#\n");

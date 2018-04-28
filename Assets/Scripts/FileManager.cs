@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine.UI;
 using System.Linq;
-using System;
 
 public class FileManager : MonoBehaviour
 {
@@ -12,12 +10,20 @@ public class FileManager : MonoBehaviour
 
     public static FileManager instance;
 
-
-    public void GetImage(string campaignName) {
+    /// <summary>
+    /// Get the image from the gallery
+    /// </summary>
+    /// <param name="campaignName">Name of the campaign to reference for display purposes</param>
+    public void GetImage(string campaignName)
+    {
         GetComponent<PermissionsManager>().GetGalleryImage(campaignName);
     }
 
-    //user chooses standard template to be saved as a modified template
+    /// <summary>
+    /// Propmt user to save a template based on the campaign
+    /// </summary>
+    /// <param name="template">Name of the selected template</param>
+    /// <param name="campaignName">Name of the current campain</param>
     public void SaveTemplate(string template, string campaignName)
     {
         TextAsset[] templateAssets = Resources.LoadAll<TextAsset>("Templates");
@@ -33,6 +39,9 @@ public class FileManager : MonoBehaviour
         SerializationManager.SaveObject(path, data);
     }
 
+    /// <summary>
+    /// Get all files related to a specific campaign, used to display all related files
+    /// </summary>
     void PullAssetNames()
     {
         string assetPath = SerializationManager.CreatePath("");
@@ -90,8 +99,11 @@ public class FileManager : MonoBehaviour
         return stringList.ToArray();
     }
 
-    //Create a blank new savedata
-    public void CreateCampaign() {
+    /// <summary>
+    /// Create a new campaign with a distinct
+    /// </summary>
+    public void CreateCampaign()
+    {
 
         const string newName = "NewCampaign";
        
@@ -114,6 +126,9 @@ public class FileManager : MonoBehaviour
         } 
     }
 
+    /// <summary>
+    /// Delete all campaign tab game objects
+    /// </summary>
     public void DeleteCampaignTabs()
     {
         Campaign[] tabs = GetComponentsInChildren<Campaign>();
@@ -124,6 +139,9 @@ public class FileManager : MonoBehaviour
     
     }
 
+    /// <summary>
+    /// Redisplay all current capaigns in the tab
+    /// </summary>
     public void ReloadCampaignTabs()
     {
         DeleteCampaignTabs();
@@ -138,12 +156,17 @@ public class FileManager : MonoBehaviour
     }
 
 
-    // Should create a save data for each folder in savedata
+    /// <summary>
+    /// called at initialization
+    /// </summary>
     void Start()
     {
         ReloadCampaignTabs();
     }
 
+    /// <summary>
+    /// Called at creation, earlier than start
+    /// </summary>
     void Awake()
     {
         instance = this;

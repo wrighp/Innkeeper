@@ -9,21 +9,21 @@ public class PinManager : MonoBehaviour {
     public GameObject pinPrefab;
     public GameObject dragIcon;
 
-    PageManager pM;
     GameObject drawnImage;
     bool heldDown = false;
 
-
-    public void Start()
-    {
-        pM = GameObject.FindObjectOfType<PageManager>();
-    }
-
+    /// <summary>
+    /// Function called every frame to perform specified actions
+    /// </summary>
     public void Update()
     {
         dragIcon.transform.position = Input.mousePosition;
     }
 
+    /// <summary>
+    /// Event Listener called when starting a drag action, used to move pin objects around the map
+    /// </summary>
+    /// <param name="obj"></param>
     public void Drag(GameObject obj)
     {
         Image dragImage = dragIcon.GetComponent<Image>();
@@ -38,6 +38,10 @@ public class PinManager : MonoBehaviour {
         heldDown = true;
     }
 
+    /// <summary>
+    /// Called when a drag action is released, places the dragged pin on the map
+    /// </summary>
+    /// <param name="obj"></param>
     public void Release(GameObject obj)
     {
         if (!heldDown)
@@ -61,11 +65,6 @@ public class PinManager : MonoBehaviour {
         {
             newPin.GetComponent<Pin>().reference = obj.GetComponent<Pin>().reference;
             Destroy(obj);
-        }
-
-        if (!rt.rect.Contains(Input.mousePosition))
-        {
-            Destroy(newPin);
         }
     }
 }

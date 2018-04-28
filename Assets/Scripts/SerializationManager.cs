@@ -14,11 +14,22 @@ public static class SerializationManager
         Selector.AddSurrogate(typeof(Color32), new StreamingContext(StreamingContextStates.All), new Color32SerializationSurrogate());
     }
 
+
+    /// <summary>
+    /// Create a path to a file in the savedata folder
+    /// </summary>
+    /// <param name="filename">Name of the file to generate a path to</param>
+    /// <returns>Full path to the file</returns>
     public static string CreatePath(string filename)
     {
         return Path.Combine(Application.persistentDataPath, "SaveData/"+filename);
     }
 
+    /// <summary>
+    /// Create byte data for an object, allowing it to be saved for later usage
+    /// </summary>
+    /// <param name="graph">Object to be serialized</param>
+    /// <returns>byte[] of data to be stored</returns>
     public static byte[] SerializeObject(object graph)
     {
         MemoryStream ms = new MemoryStream();
@@ -29,6 +40,12 @@ public static class SerializationManager
         return array;
     }
 
+    /// <summary>
+    /// Serialize an object and save at the specified path
+    /// </summary>
+    /// <param name="stream">IO stream to write to</param>
+    /// <param name="graph">Object to serialize</param>
+    /// <returns>bool indicating whether the object saved</returns>
     public static bool SaveObject(Stream stream, object graph)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -47,6 +64,13 @@ public static class SerializationManager
         return true;
 
     }
+
+    /// <summary>
+    /// Serialize an object and save at the specified path
+    /// </summary>
+    /// <param name="path">Path to save to</param>
+    /// <param name="graph">Object to serialize</param>
+    /// <returns>bool indicating whether the object saved</returns>
     public static bool SaveObject(string path, object graph)
     {
 
@@ -83,6 +107,11 @@ public static class SerializationManager
         return true;
     }
 
+    /// <summary>
+    /// Load an object from a byte array
+    /// </summary>
+    /// <param name="array">Binary data to load</param>
+    /// <returns>Returns the object loaded</returns>
     public static object LoadObject(byte[] array)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -103,7 +132,11 @@ public static class SerializationManager
         }
     }
 
-
+    /// <summary>
+    /// Load an object at the specified path
+    /// </summary>
+    /// <param name="path">Full path to the object</param>
+    /// <returns>Reference to the loaded  object</returns>
     public static object LoadObject(string path)
     {
         if (!File.Exists(path))
@@ -129,6 +162,12 @@ public static class SerializationManager
             }
         }
     }
+
+    /// <summary>
+    /// Create a folder at the specified path
+    /// </summary>
+    /// <param name="folderPath">full path to the folder</param>
+    /// <returns>bool indicating if the function succeeded</returns>
     public static bool CreateFolder(string folderPath)
     {
         if (Directory.Exists(folderPath))
@@ -149,6 +188,11 @@ public static class SerializationManager
         return true;
     }
 
+    /// <summary>
+    /// Delete the file at the specifed path
+    /// </summary>
+    /// <param name="path">Full path to the file to be deleted</param>
+    /// <returns>bool indicating if the function succeeded</returns>
     public static bool DeleteFile(string path)
     {
         if (File.Exists(path))
@@ -172,6 +216,12 @@ public static class SerializationManager
         return true;
     }
 
+    /// <summary>
+    /// Delete a folder and all recursive folders if applicable
+    /// </summary>
+    /// <param name="path">Full path to the folder</param>
+    /// <param name="recursive">Whether folders should be deleted recursively or not</param>
+    /// <returns></returns>
     public static bool DeleteFolder(string path, bool recursive)
     {
         if (Directory.Exists(path))

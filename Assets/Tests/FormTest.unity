@@ -1358,7 +1358,7 @@ Prefab:
     - target: {fileID: 224140634187563958, guid: 7f66e41d1c2d60b429c0da670d3caaa3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000109281726
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224140634187563958, guid: 7f66e41d1c2d60b429c0da670d3caaa3,
         type: 2}
@@ -1400,6 +1400,12 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114003005981580234, guid: 7f66e41d1c2d60b429c0da670d3caaa3,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5ef7f9c419c85a449ff919120f8432e,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f66e41d1c2d60b429c0da670d3caaa3, type: 2}
   m_IsPrefabParent: 0
@@ -1552,7 +1558,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1267152168}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1667,8 +1673,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1814626984}
   m_HandleRect: {fileID: 1814626983}
   m_Direction: 0
-  m_Value: 0.50000006
-  m_Size: 0.39149997
+  m_Value: 0.5
+  m_Size: 0.3915
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1779,6 +1785,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1794527959}
   - component: {fileID: 1794527958}
+  - component: {fileID: 1794527960}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1835,6 +1842,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1794527960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1794527957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acd4637488554d44c9b4a3269c6eb8a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1814626982
 GameObject:
   m_ObjectHideFlags: 0

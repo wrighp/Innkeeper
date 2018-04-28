@@ -12,21 +12,32 @@ public class NetworkHandler : NetworkBehaviour
     public Dictionary<string, GameObject> pages = new Dictionary<string, GameObject>();
     public GameObject[] prefabs;
 
+    /// <summary>
+    /// Called on creation
+    /// </summary>
     public void Awake()
     {
         DontDestroyOnLoad(gameObject);
         instance = this;
     }
 
+    /// <summary>
+    /// Called when a client joins the game
+    /// </summary>
     public override void OnStartClient()
     {
         base.OnStartClient();
+        //Add an event listener to allow the suer to get updates to pages when someone makes a change
         pageSyncList.Callback = OnListChange;
         //OnListChange not called on initialization, so rebuild all pages based on synclist
         RebuildAllPages();
     }
 
-    //Client call
+    /// <summary>
+    /// Rebuild all pages when a page is detected as modified
+    /// </summary>
+    /// <param name="op">Operation performed on the synclist</param>
+    /// <param name="index">Index of the page tha twas modifed in the list</param>
     private void OnListChange(SyncListPagePacket.Operation op, int index)
     {
         //Go through entire list and rebuild dictionary for now, every time OnListChange happens
@@ -60,6 +71,10 @@ public class NetworkHandler : NetworkBehaviour
         pages.Clear();
     }
 
+    /// <summary>
+    /// Build a page based on recived page packets
+    /// </summary>
+    /// <param name="packet">Contains all data needed to build a page</param>
     private void BuildPage(PagePacket packet)
     {
         switch (packet.pageType)
@@ -82,6 +97,10 @@ public class NetworkHandler : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Destory a page
+    /// </summary>
+    /// <param name="page">Page to be destroyed</param>
     private void DestroyPage(GameObject page)
     {
 
@@ -90,7 +109,7 @@ public class NetworkHandler : NetworkBehaviour
     /// <summary>
     /// Function called on server to destroy a page of a given name
     /// </summary>
-    /// <param name="name"></param>
+    /// <param name="name">Name pf the page to be deleted</param>
     public void CmdDestroyPage(string name)
     {
         var packet = new PagePacket();
@@ -103,7 +122,7 @@ public class NetworkHandler : NetworkBehaviour
     /// Function called on server when PagePacket data is sent to it from a player client
     /// Can be used to create new pages, destroy old ones, and overrite existing pages
     /// </summary>
-    /// <param name="packet"></param>
+    /// <param name="packet">Packet sent to build pages on clients</param>
     public void CmdSendPagePacket(PagePacket packet)
     {
         //Override value in list if page name already exists

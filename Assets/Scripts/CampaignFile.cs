@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,60 +9,94 @@ public class CampaignFile : MonoBehaviour {
     string extension;
     Campaign campaign;
 
-    public void SetCampaignName(Campaign c) {
+    /// <summary>
+    /// Set the related campaign name for the current file
+    /// </summary>
+    /// <param name="c">Name of the campaign</param>
+    public void SetCampaignName(Campaign c)
+    {
         campaign = c;
     }
 
-    //Set name of folder on instantiation
-    public void SetFileName(string cname) {
+    /// <summary>
+    /// Get the extension type and name of the file
+    /// </summary>
+    /// <param name="cname"></param>
+    public void SetFileName(string cname)
+    {
         fileName = cname.Split('.')[0];
         extension = cname.Split('.')[1];
         GetComponentInChildren<InputField>().text = fileName;
     }
 
-    public string GetFileName() {
+    /// <summary>
+    /// Return file name
+    /// </summary>
+    /// <returns>nameof the file without the extension</returns>
+    public string GetFileName()
+    {
         return fileName;
     }
+
+    /// <summary>
+    /// Return the extension
+    /// </summary>
+    /// <returns>Extension tyoe as string</returns>
     public string GetExtension()
     {
         return extension;
     }
 
+    /// <summary>
+    /// Return the campaign name
+    /// </summary>
+    /// <returns>Campaign name</returns>
     public Campaign GetCampaign()
     {
         return campaign;
     }
+
+    /// <summary>
+    /// Event Listener, Load the data for the current page type into a game object for viewing 
+    /// </summary>
     public void LoadFile()
     {
-        Debug.Log("Load file button");
         PageManager.instance.SwitchPage(this);
     }
 
-    //Change the name pf the folder if and when the user changes the name
-    public void ChangeFileName() {
+    /// <summary>
+    /// Event Listener, change the file name based on the changes the user made into the input field
+    /// </summary>
+    public void ChangeFileName()
+    {
         string cname = GetComponentInChildren<InputField>().text;
         var oldPath = SerializationManager.CreatePath(campaign.GetCampaignName() + "/" + fileName + "." + extension);
         var newPath = SerializationManager.CreatePath(campaign.GetCampaignName() + "/" + cname + "." + extension);
-        if (oldPath.Equals(newPath) || Directory.Exists(newPath)) {
+        if (oldPath.Equals(newPath) || Directory.Exists(newPath))
+        {
             campaign.LoadFiles();
             return;
         }
 
         Debug.LogFormat("File: {0}\nRenaming to: {1}", oldPath, newPath);
-        try {
+        try
+        {
             Directory.Move(oldPath, newPath);
             fileName = cname;
             campaign.LoadFiles();
-        } catch (IOException ex) {
+        }
+        catch (IOException ex)
+        {
             Debug.LogException(ex);
         }
     }
 
-    //Delete file
-    public void DeleteFile() {
+    /// <summary>
+    /// Delete the file from the campaign folder
+    /// </summary>
+    public void DeleteFile()
+    {
         SerializationManager.DeleteFile(SerializationManager.CreatePath(campaign.GetCampaignName() + "/" + fileName + "." + extension));
         campaign.LoadFiles();
     }
-
-
 }
