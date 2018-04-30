@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224140634187563958}
   - component: {fileID: 222694687307883666}
   - component: {fileID: 114003005981580234}
+  - component: {fileID: 114841405954696754}
   m_Layer: 5
   m_Name: Map
   m_TagString: Map
@@ -55,6 +56,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114841405954696754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1846547320100512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9394ddeb647590c42be4993d8057cc2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  campaign: 
+  pin: {fileID: 1044643925023534, guid: 45913ec0641c7d44f98259d0da63f48e, type: 2}
 --- !u!222 &222694687307883666
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -13,10 +13,19 @@ public class MapForm : PageObject {
     /// <param name="data"></param>
     public override void BuildPage(PageData data)
     {
-        MapData uiData = (MapData)data;
+        SharedImageData uiData = (SharedImageData)data;
+        Texture2D v = new Texture2D(2, 2);
+        v.LoadImage(uiData.bytes);
+        v.Apply();
+        GetComponent<Image>().sprite = Sprite.Create(v, new Rect(0.0f, 0.0f, v.width, v.height), new Vector2(0.5f, 0.5f), 100.0f);
 
         //Add pins to the map
-        foreach (PinData p in uiData.pins)
+        if (uiData.info == null)
+        {
+            return;
+        }
+
+        foreach (PinData p in uiData.info.pins)
         {
             GameObject tmp = Instantiate(pin, transform);
             tmp.transform.position = p.position;
@@ -25,9 +34,16 @@ public class MapForm : PageObject {
 }
 
 [Serializable]
+public class SharedImageData : PageData
+{
+    public byte[] bytes;
+    public MapData info;
+    //ImageConversion.LoadImage(Texture2D, data);
+}
+
+[Serializable]
 public class MapData : PageData
 {
-    public string imagePath;
     public PinData[] pins;
 
     /// <summary>

@@ -171,10 +171,3 @@ public struct PagePacket
 }
 
 public class SyncListPagePacket : SyncListStruct<PagePacket> { }
-
-[Serializable]
-public class SharedImageData : PageData
-{
-    public byte[] bytes;
-    //ImageConversion.LoadImage(Texture2D, data);
-}

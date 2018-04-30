@@ -11,6 +11,8 @@ public class PageManager : MonoBehaviour {
     public GameObject currrentPage = null;
     public GameObject viewport;
 
+    public Texture2D tex;
+
     PinchableScrollRect scrollRect;
     GameObject pinManager;
     string openPage;
@@ -30,6 +32,18 @@ public class PageManager : MonoBehaviour {
         scrollRect = GameObject.FindObjectOfType<PinchableScrollRect>();
         pinManager = GameObject.Find("PinManager");
         pinManager.SetActive(false);
+
+
+
+        var v = new Texture2D(2, 2);
+        v.LoadImage(tex.EncodeToPNG(), false);
+        v.Apply();
+
+        SharedImageData sid = new SharedImageData();
+        sid.bytes = v.EncodeToPNG();
+        sid.info = null;
+        string finalPath = SerializationManager.CreatePath("NewCampaign/NewMap.map");
+        SerializationManager.SaveObject(finalPath, sid);
     }
 
     /// <summary>
@@ -92,6 +106,10 @@ public class PageManager : MonoBehaviour {
             case "map":
                 {
                     pinManager.SetActive(true);
+                    currrentPage = Instantiate(prefabs[1], viewport.transform);
+                    SharedImageData uiData = (SharedImageData)SerializationManager.LoadObject(fullPath);
+                    currrentPage.GetComponent<MapForm>().campaign = file.GetCampaign().GetCampaignName();
+                    currrentPage.GetComponent<MapForm>().BuildPage(uiData);
                     break;
                 }
             default:
