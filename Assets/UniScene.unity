@@ -339,7 +339,12 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1004364198729816, guid: d4a188f56525f504cae7f9e2bd5acd77, type: 2}
+      propertyPath: m_Name
+      value: Button
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114992529595031838, guid: d4a188f56525f504cae7f9e2bd5acd77, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d4a188f56525f504cae7f9e2bd5acd77, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &165425752
@@ -778,6 +783,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224455746212673198, guid: dfe50fdd2035583438aeaba436111bb5,
     type: 2}
   m_PrefabInternal: {fileID: 2048332705}
+--- !u!114 &614871544 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114438018971923554, guid: d4a188f56525f504cae7f9e2bd5acd77,
+    type: 2}
+  m_PrefabInternal: {fileID: 130961968}
+  m_Script: {fileID: 11500000, guid: b4e8a5d360167f948a8f6a738211a98c, type: 3}
 --- !u!1 &843689691 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1164335072577132, guid: dfe50fdd2035583438aeaba436111bb5,
@@ -814,6 +825,58 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &1145262510 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1004364198729816, guid: d4a188f56525f504cae7f9e2bd5acd77,
+    type: 2}
+  m_PrefabInternal: {fileID: 130961968}
+--- !u!114 &1145262511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1145262510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 614871544}
+          m_MethodName: Drag
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1145262510}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 614871544}
+          m_MethodName: Drag
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1145262510}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1157100511
 GameObject:
   m_ObjectHideFlags: 0
