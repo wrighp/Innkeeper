@@ -30,6 +30,7 @@ public class MapForm : PageObject {
         {
             GameObject tmp = Instantiate(pin, transform);
             tmp.transform.position = p.position;
+            tmp.GetComponent<Image>().color = p.color;
         }
     }
 }

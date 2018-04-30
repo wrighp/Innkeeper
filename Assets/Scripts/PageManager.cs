@@ -32,18 +32,6 @@ public class PageManager : MonoBehaviour {
         scrollRect = GameObject.FindObjectOfType<PinchableScrollRect>();
         pinManager = GameObject.Find("PinManager");
         pinManager.SetActive(false);
-
-
-
-        var v = new Texture2D(2, 2);
-        v.LoadImage(tex.EncodeToPNG(), false);
-        v.Apply();
-
-        SharedImageData sid = new SharedImageData();
-        sid.bytes = v.EncodeToPNG();
-        sid.info = null;
-        string finalPath = SerializationManager.CreatePath("NewCampaign/NewMap.map");
-        SerializationManager.SaveObject(finalPath, sid);
     }
 
     /// <summary>
