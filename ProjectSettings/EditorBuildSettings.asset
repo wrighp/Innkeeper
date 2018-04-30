@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/UniScene.unity
     guid: a74dddf2b53cdb847a0ae119fe207f3e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Tests/FormTest.unity
     guid: cb057f6786151b44190a23959a38c01a
   - enabled: 0

@@ -18,7 +18,8 @@ public class MapForm : PageObject {
         v.LoadImage(uiData.bytes);
         v.Apply();
         GetComponent<Image>().sprite = Sprite.Create(v, new Rect(0.0f, 0.0f, v.width, v.height), new Vector2(0.5f, 0.5f), 100.0f);
-
+        GetComponent<RectTransform>().sizeDelta = new Vector2(v.width, v.height);
+        
         //Add pins to the map
         if (uiData.info == null)
         {
